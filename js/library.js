@@ -57,7 +57,6 @@ const libraryCategories = {
 };
 
 export function initializeLibrary() {
-    alert("Library module is running");
   const library = document.getElementById("library");
   const section = library?.querySelector(".library-category-section");
 
@@ -66,7 +65,6 @@ export function initializeLibrary() {
   const originalContent = section.innerHTML;
 
   section.addEventListener("click", event => {
-        alert("Library click detected");
     const categoryButton = event.target.closest("[data-category]");
     const backButton = event.target.closest("[data-library-back]");
 
