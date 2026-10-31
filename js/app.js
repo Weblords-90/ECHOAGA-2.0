@@ -16,6 +16,13 @@ function applyTheme(theme) {
   state.theme = theme;
   document.body.dataset.theme = theme;
   localStorage.setItem("echoaga-theme", theme);
+
+  document.querySelectorAll("[data-theme-choice]").forEach(button => {
+    button.classList.toggle(
+      "selected",
+      button.dataset.themeChoice === theme
+    );
+  });
 }
 
 function navigateTo(screen) {
@@ -40,6 +47,14 @@ function initializeApp() {
   applyTheme(state.theme);
   initializeNavigation(navigateTo);
   navigateTo(state.currentScreen);
+
+  document.addEventListener("click", event => {
+    const themeButton = event.target.closest("[data-theme-choice]");
+
+    if (!themeButton) return;
+
+    applyTheme(themeButton.dataset.themeChoice);
+  });
 
   console.log("ECHOAGA 2.0 initialized.");
 }
