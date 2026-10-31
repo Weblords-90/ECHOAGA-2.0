@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,192 +21,189 @@
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
+
 <body data-theme="basic">
 
   <main id="app">
-  <section id="home" data-screen="home" class="screen active">
-  <header class="home-header">
-    <div class="home-brand">ECHOAGA</div>
-  </header>
 
-  <h1 class="home-greeting">Your world.<br>Your stories.</h1>
-  <p class="home-subtitle">Escape into a universe of audio.</p>
+    <section id="home" data-screen="home" class="screen active">
+      <header class="home-header">
+        <div class="home-brand">ECHOAGA</div>
+      </header>
 
-  <div class="home-featured">
-    <h3>Discover your next obsession.</h3>
-    <p>Stories, ideas and unforgettable journeys are waiting for you.</p>
-  </div>
+      <h1 class="home-greeting">Your world.<br>Your stories.</h1>
+      <p class="home-subtitle">Escape into a universe of audio.</p>
 
-  <section class="home-section">
-    <h2 class="home-section-title">Explore your universe</h2>
-    <p class="home-subtitle">Discover stories across different worlds and genres.</p>
-  </section>
+      <div class="home-featured">
+        <h3>Discover your next obsession.</h3>
+        <p>Stories, ideas and unforgettable journeys are waiting for you.</p>
+      </div>
 
-  <section class="home-section">
-    <h2 class="home-section-title">Continue listening</h2>
-    <p class="home-subtitle">Your listening journey will appear here.</p>
-  </section>
-</section>
-    
-    
-<section id="discover" data-screen="discover" class="screen">
-  <header class="discover-header">
-    <h1 class="discover-title">Discover</h1>
-    <p class="discover-description">Find your next unforgettable listening experience.</p>
-  </header>
+      <section class="home-section">
+        <h2 class="home-section-title">Explore your universe</h2>
+        <p class="home-subtitle">Discover stories across different worlds and genres.</p>
+      </section>
 
-  <input
-    type="search"
-    class="discover-search"
-    placeholder="Search books, authors and genres..."
-    aria-label="Search audiobooks"
-  >
+      <section class="home-section">
+        <h2 class="home-section-title">Continue listening</h2>
+        <p class="home-subtitle">Your listening journey will appear here.</p>
+      </section>
+    </section>
 
-  <section class="discover-section">
-    <h2>Made for your curiosity</h2>
-    <div class="discover-placeholder">
-      Your next favourite story is waiting to be discovered.
-    </div>
-  </section>
+    <section id="discover" data-screen="discover" class="screen">
+      <header class="discover-header">
+        <h1 class="discover-title">Discover</h1>
+        <p class="discover-description">Find your next unforgettable listening experience.</p>
+      </header>
 
-  <section class="discover-section">
-    <h2>Popular right now</h2>
-    <div class="discover-placeholder">
-      Popular audiobooks will appear here.
-    </div>
-  </section>
+      <input
+        type="search"
+        class="discover-search"
+        placeholder="Search books, authors and genres..."
+        aria-label="Search audiobooks"
+      >
 
-  <section class="discover-section">
-    <h2>Explore by mood</h2>
-    <div class="discover-placeholder">
-      Discover stories that match your mood.
-    </div>
-  </section>
-</section>
-    
-    
-<section id="library" data-screen="library" class="screen">
-  <header class="library-header">
-    <h1 class="library-title">Your Library</h1>
-    <p class="library-description">Explore worlds of knowledge, imagination and discovery.</p>
-  </header>
+      <section class="discover-section">
+        <h2>Made for your curiosity</h2>
+        <div class="discover-placeholder">
+          Your next favourite story is waiting to be discovered.
+        </div>
+      </section>
 
-  <input
-    type="search"
-    class="library-search"
-    placeholder="Search your universe..."
-    aria-label="Search library"
-  >
+      <section class="discover-section">
+        <h2>Popular right now</h2>
+        <div class="discover-placeholder">
+          Popular audiobooks will appear here.
+        </div>
+      </section>
 
-  <section class="library-category-section">
-    <h2>Explore Categories</h2>
+      <section class="discover-section">
+        <h2>Explore by mood</h2>
+        <div class="discover-placeholder">
+          Discover stories that match your mood.
+        </div>
+      </section>
+    </section>
 
-    <div class="library-category-grid">
-      <button class="library-category" type="button" data-category="psychology">
-        <h3>Psychology</h3>
-        <p>Understand the human mind</p>
-      </button>
+    <section id="library" data-screen="library" class="screen">
+      <header class="library-header">
+        <h1 class="library-title">Your Library</h1>
+        <p class="library-description">Explore worlds of knowledge, imagination and discovery.</p>
+      </header>
 
-      <button class="library-category" type="button" data-category="self-improvement">
-        <h3>Self-Improvement</h3>
-        <p>Build a better version of yourself</p>
-      </button>
+      <input
+        type="search"
+        class="library-search"
+        placeholder="Search your universe..."
+        aria-label="Search library"
+      >
 
-      <button class="library-category" type="button" data-category="manga">
-        <h3>Manga</h3>
-        <p>Enter illustrated worlds</p>
-      </button>
+      <section class="library-category-section">
+        <h2>Explore Categories</h2>
 
-      <button class="library-category" type="button" data-category="novels">
-        <h3>Novels</h3>
-        <p>Stories that stay with you</p>
-      </button>
+        <div class="library-category-grid">
 
-      <button class="library-category" type="button" data-category="mystery">
-        <h3>Mystery</h3>
-        <p>Uncover the unknown</p>
-      </button>
+          <button class="library-category" type="button" data-category="psychology">
+            <h3>Psychology</h3>
+            <p>Understand the human mind</p>
+          </button>
 
-      <button class="library-category" type="button" data-category="sci-fi">
-        <h3>Sci-Fi</h3>
-        <p>Explore beyond reality</p>
-      </button>
-    </div>
-  </section>
-</section>
-    
+          <button class="library-category" type="button" data-category="self-improvement">
+            <h3>Self-Improvement</h3>
+            <p>Build a better version of yourself</p>
+          </button>
 
-<section id="profile" data-screen="profile" class="screen">
-  <header class="profile-header">
-    <h1 class="profile-title">Your Profile</h1>
-    <p class="profile-description">Your personal space in the ECHOAGA universe.</p>
-  </header>
+          <button class="library-category" type="button" data-category="manga">
+            <h3>Manga</h3>
+            <p>Enter illustrated worlds</p>
+          </button>
 
-  <div class="profile-card">
-    <div class="profile-avatar">E</div>
-    <h2>Welcome to ECHOAGA</h2>
-    <p>Your listening journey starts here.</p>
-  </div>
+          <button class="library-category" type="button" data-category="novels">
+            <h3>Novels</h3>
+            <p>Stories that stay with you</p>
+          </button>
 
-  <section class="profile-section">
-    <h2>Your Account</h2>
-    <div class="profile-option">Account Information</div>
-    <div class="profile-option">Listening History</div>
-    <div class="profile-option">Your Bookmarks</div>
-  </section>
+          <button class="library-category" type="button" data-category="mystery">
+            <h3>Mystery</h3>
+            <p>Uncover the unknown</p>
+          </button>
 
-  <section class="profile-section">
-    <h2>ECHOAGA Premium</h2>
-    <div class="profile-card">
-      <h2>Experience more.</h2>
-      <p>Unlock the Premium experience with an exclusive black and gold identity and eligible premium content.</p>
-    </div>
-  </section>
-</section>
-    
-<section id="settings" data-screen="settings" class="screen">
-  <header class="settings-header">
-    <h1 class="settings-title">Settings</h1>
-    <p class="settings-description">Make your ECHOAGA experience yours.</p>
-  </header>
+          <button class="library-category" type="button" data-category="sci-fi">
+            <h3>Sci-Fi</h3>
+            <p>Explore beyond reality</p>
+          </button>
 
-  <section class="settings-section">
-    <h2>Appearance</h2>
+        </div>
+      </section>
+    </section>
 
+    <section id="profile" data-screen="profile" class="screen">
+      <header class="profile-header">
+        <h1 class="profile-title">Your Profile</h1>
+        <p class="profile-description">Your personal space in the ECHOAGA universe.</p>
+      </header>
 
-  <button class="settings-option" type="button" data-theme-choice="basic">
-    <div>
-      <strong>Basic Theme</strong>
-      <span>Green and gold</span>
-    </div>
-  </button>
+      <div class="profile-card">
+        <div class="profile-avatar">E</div>
+        <h2>Welcome to ECHOAGA</h2>
+        <p>Your listening journey starts here.</p>
+      </div>
 
-  <button class="settings-option" type="button" data-theme-choice="premium">
-    <div>
-      <strong>Premium Theme</strong>
-      <span>Black and gold</span>
-    </div>
-  </button>
-  
-    
-  </section>
+      <section class="profile-section">
+        <h2>Your Account</h2>
+        <div class="profile-option">Account Information</div>
+        <div class="profile-option">Listening History</div>
+        <div class="profile-option">Your Bookmarks</div>
+      </section>
 
-  <section class="settings-section">
-    <h2>Listening Preferences</h2>
-    <div class="settings-option">Playback Quality</div>
-    <div class="settings-option">Default Playback Speed</div>
-    <div class="settings-option">Sleep Timer</div>
-  </section>
+      <section class="profile-section">
+        <h2>ECHOAGA Premium</h2>
+        <div class="profile-card">
+          <h2>Experience more.</h2>
+          <p>Unlock the Premium experience with an exclusive black and gold identity and eligible premium content.</p>
+        </div>
+      </section>
+    </section>
 
-  <section class="settings-section">
-    <h2>General</h2>
-    <div class="settings-option">Notifications</div>
-    <div class="settings-option">Privacy</div>
-    <div class="settings-option">About ECHOAGA</div>
-  </section>
-  
-</section>
-    
+    <section id="settings" data-screen="settings" class="screen">
+      <header class="settings-header">
+        <h1 class="settings-title">Settings</h1>
+        <p class="settings-description">Make your ECHOAGA experience yours.</p>
+      </header>
+
+      <section class="settings-section">
+        <h2>Appearance</h2>
+
+        <button class="settings-option" type="button" data-theme-choice="basic">
+          <div>
+            <strong>Basic Theme</strong>
+            <span>Green and gold</span>
+          </div>
+        </button>
+
+        <button class="settings-option" type="button" data-theme-choice="premium">
+          <div>
+            <strong>Premium Theme</strong>
+            <span>Black and gold</span>
+          </div>
+        </button>
+      </section>
+
+      <section class="settings-section">
+        <h2>Listening Preferences</h2>
+        <div class="settings-option">Playback Quality</div>
+        <div class="settings-option">Default Playback Speed</div>
+        <div class="settings-option">Sleep Timer</div>
+      </section>
+
+      <section class="settings-section">
+        <h2>General</h2>
+        <div class="settings-option">Notifications</div>
+        <div class="settings-option">Privacy</div>
+        <div class="settings-option">About ECHOAGA</div>
+      </section>
+    </section>
+
   </main>
 
   <div id="miniPlayer" hidden></div>
@@ -221,5 +217,6 @@
   </nav>
 
   <script type="module" src="js/app.js"></script>
+
 </body>
 </html>
