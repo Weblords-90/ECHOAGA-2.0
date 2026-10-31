@@ -92,3 +92,44 @@
 .library-category:active {
   transform: scale(0.98);
 }
+.library-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(214, 182, 92, 0.35);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--surface), var(--bg));
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.library-back:hover {
+  border-color: var(--gold);
+  box-shadow: 0 0 18px rgba(214, 182, 92, 0.15);
+  transform: translateX(-3px);
+}
+
+.library-back:active {
+  transform: scale(0.96);
+}
+
+.library-back:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.library-category {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.library-category:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+}
