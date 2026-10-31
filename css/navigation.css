@@ -1,1 +1,33 @@
 
+#bottomNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 4px;
+  padding: 12px 6px calc(12px + env(safe-area-inset-bottom));
+  background: var(--bg-soft, #0d1511);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+#bottomNavigation button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: #89948d;
+  padding: 10px 2px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: color 0.25s ease, background 0.25s ease;
+}
+
+#bottomNavigation button.active {
+  color: #d4af37;
+  background: rgba(212, 175, 55, 0.1);
+}
+
+#bottomNavigation button:active {
+  transform: scale(0.96);
+}
+
