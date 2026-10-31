@@ -26,6 +26,27 @@
 }
 
 .settings-option {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.settings-option.selected {
+  border: 1px solid var(--gold);
+  background: rgba(212, 175, 55, 0.12);
+}
+
+.settings-option.selected strong {
+  color: var(--gold);
+}
+
+.settings-option:active {
+  transform: scale(0.98);
+}
+
+
+.settings-option {
   display: flex;
   align-items: center;
   justify-content: space-between;
