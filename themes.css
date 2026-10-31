@@ -1,0 +1,30 @@
+:root {
+  --basic-bg: #10251b;
+  --basic-surface: #193b2b;
+  --basic-gold: #d6b65c;
+  --basic-text: #f3f0e5;
+
+  --premium-bg: #080808;
+  --premium-surface: #171717;
+  --premium-gold: #e2bd65;
+  --premium-text: #f5f0e5;
+
+  --bg: var(--basic-bg);
+  --surface: var(--basic-surface);
+  --gold: var(--basic-gold);
+  --text: var(--basic-text);
+}
+
+body[data-theme="basic"] {
+  --bg: var(--basic-bg);
+  --surface: var(--basic-surface);
+  --gold: var(--basic-gold);
+  --text: var(--basic-text);
+}
+
+body[data-theme="premium"] {
+  --bg: var(--premium-bg);
+  --surface: var(--premium-surface);
+  --gold: var(--premium-gold);
+  --text: var(--premium-text);
+}
