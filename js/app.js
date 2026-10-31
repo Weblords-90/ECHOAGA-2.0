@@ -1,6 +1,6 @@
 
 import { initializeNavigation } from "./navigation.js";
-
+import { initializeLibrary } from "./library.js";
 const app = document.getElementById("app");
 
 const state = {
@@ -46,6 +46,7 @@ function initializeApp() {
 
   applyTheme(state.theme);
   initializeNavigation(navigateTo);
+  initializeLibrary();
   navigateTo(state.currentScreen);
 
   document.addEventListener("click", event => {
