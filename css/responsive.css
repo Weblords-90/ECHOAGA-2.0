@@ -1,1 +1,35 @@
 
+@media (max-width: 480px) {
+  .screen {
+    padding: 20px 14px;
+  }
+
+  .screen h1 {
+    font-size: 25px;
+  }
+
+  #bottomNavigation button {
+    font-size: 10px;
+    padding: 10px 1px;
+  }
+}
+
+@media (min-width: 768px) {
+  #app {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .screen {
+    padding: 32px;
+  }
+
+  #bottomNavigation {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 700px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 18px 18px 0 0;
+  }
+}
+
