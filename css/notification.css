@@ -1,7 +1,7 @@
 
 #notificationContainer {
   position: fixed;
-  top: 20px;
+  top: calc(20px + env(safe-area-inset-top));
   right: 16px;
   z-index: 10000;
   display: flex;
@@ -16,13 +16,13 @@
   align-items: center;
   gap: 12px;
   padding: 15px 18px;
-  border: 1px solid rgba(212, 175, 55, 0.25);
+  border: 1px solid var(--border);
   border-radius: 14px;
-  background: #101713;
-  color: #f4f0df;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  background: var(--surface-raised);
+  color: var(--text);
+  box-shadow: 0 12px 35px var(--shadow);
   pointer-events: auto;
-  animation: notificationEnter 0.35s ease forwards;
+  animation: notificationEnter .35s ease both;
 }
 
 .echoaga-notification.success {
@@ -34,35 +34,52 @@
 }
 
 .echoaga-notification.info {
-  border-left: 3px solid #d4af37;
+  border-left: 3px solid var(--gold);
 }
 
 .echoaga-notification-icon {
   flex-shrink: 0;
-  color: #d4af37;
+  color: var(--gold);
   font-size: 20px;
 }
 
 .echoaga-notification-message {
   flex: 1;
+  min-width: 0;
   font-size: 14px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .echoaga-notification-close {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
   border: 0;
+  border-radius: 50%;
   background: transparent;
-  color: #b9b9ae;
+  color: var(--muted);
   font-size: 20px;
   cursor: pointer;
+  transition: background .2s ease, color .2s ease;
 }
 
 .echoaga-notification-close:hover {
-  color: #ffffff;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.echoaga-notification-close:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .echoaga-notification.removing {
-  animation: notificationExit 0.25s ease forwards;
+  animation: notificationExit .25s ease forwards;
+  pointer-events: none;
 }
 
 @keyframes notificationEnter {
@@ -85,8 +102,21 @@
 
 @media (max-width: 480px) {
   #notificationContainer {
-    top: 12px;
+    top: calc(12px + env(safe-area-inset-top));
     right: 12px;
     width: calc(100% - 24px);
   }
+
+  .echoaga-notification {
+    padding: 13px 14px;
+  }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .echoaga-notification,
+  .echoaga-notification.removing,
+  .echoaga-notification-close {
+    animation: none;
+    transition: none;
+  }
+  }
