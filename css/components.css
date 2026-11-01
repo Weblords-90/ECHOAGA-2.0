@@ -200,3 +200,31 @@ select:focus {
     padding: 24px 18px;
   }
   }
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+#authOverlay[hidden] {
+  display: none !important;
+}
+
+#authPanel button {
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+#authPanel button:active {
+  transform: scale(0.97);
+}
