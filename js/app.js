@@ -63,6 +63,7 @@ function initializeApp() {
   initializePlayer();
   initializeProfile();
   initializeSettings();
+  initializeNotifications();
   initializeBookmarks();
   navigateTo(state.currentScreen);
   
