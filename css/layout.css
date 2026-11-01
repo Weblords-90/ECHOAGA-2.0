@@ -86,4 +86,6 @@
     transform: translateX(-50%);
   }
 }
-
+#app {
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
