@@ -1,35 +1,110 @@
 
 @media (max-width: 480px) {
   .screen {
-    padding: 20px 14px;
+    padding: 18px 14px;
   }
 
-  .screen h1 {
-    font-size: 25px;
+  .home-hero {
+    min-height: 350px;
+    padding: 23px 18px;
+    border-radius: 21px;
   }
 
+  .home-hero h1 {
+    font-size: 35px;
+  }
+
+  .home-card-grid,
+  .discover-grid {
+    gap: 11px;
+  }
+
+  .home-card,
+  .discover-card {
+    padding: 10px;
+  }
+
+  .library-categories {
+    gap: 10px;
+  }
+
+  .library-category {
+    min-height: 130px;
+    padding: 13px;
+  }
+
+  .profile-card {
+    padding: 16px;
+  }
+
+  .profile-stats {
+    gap: 7px;
+  }
+
+  .profile-stat {
+    padding: 14px 6px;
+  }
+
+  .profile-stat strong {
+    font-size: 18px;
+  }
+
+  #miniPlayer {
+    right: 8px;
+    left: 8px;
+    gap: 9px;
+    padding: 9px 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 699px) {
+  .screen {
+    padding: 24px 20px;
+  }
+
+  .home-hero {
+    min-height: 390px;
+  }
+}
+
+@media (min-width: 700px) {
+  .screen {
+    padding: 30px 32px;
+  }
+
+  .home-hero {
+    margin-top: 25px;
+  }
+
+  .library-categories {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .screen {
+    padding: 38px 48px;
+  }
+
+  .home-hero {
+    min-height: 470px;
+  }
+}
+
+@media (max-width: 360px) {
   #bottomNavigation button {
     font-size: 10px;
-    padding: 10px 1px;
+    padding-right: 1px;
+    padding-left: 1px;
+  }
+
+  .profile-avatar {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+
+  .player-controls {
+    gap: 14px;
   }
 }
-
-@media (min-width: 768px) {
-  #app {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .screen {
-    padding: 32px;
-  }
-
-  #bottomNavigation {
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 700px;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 18px 18px 0 0;
-  }
-}
-
