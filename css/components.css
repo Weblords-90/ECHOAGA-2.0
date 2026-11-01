@@ -228,3 +228,68 @@ select:focus-visible {
 #authPanel button:active {
   transform: scale(0.97);
 }
+
+.book-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.45s ease, filter 0.45s ease;
+  will-change: transform;
+}
+
+.book-3d img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px 9px 9px 4px;
+  box-shadow:
+    5px 5px 12px rgba(0, 0, 0, 0.25),
+    12px 12px 22px rgba(0, 0, 0, 0.18);
+  transform: rotateY(-9deg);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.book-3d::before {
+  content: "";
+  position: absolute;
+  top: 2%;
+  bottom: 2%;
+  left: 0;
+  width: 7px;
+  background: linear-gradient(90deg, #292116, #a78a4d, #292116);
+  transform: translateX(-5px) rotateY(-45deg);
+  transform-origin: right;
+}
+
+.book-3d:hover img {
+  transform: rotateY(-18deg) translateY(-7px);
+  box-shadow: 12px 18px 28px rgba(0, 0, 0, 0.35);
+}
+
+.book-3d:active img {
+  transform: rotateY(-5deg) scale(0.96);
+}
+
+@keyframes bookFloat {
+  0%, 100% {
+    transform: translateY(0) rotateZ(0deg);
+  }
+  50% {
+    transform: translateY(-7px) rotateZ(1deg);
+  }
+}
+
+.book-floating {
+  animation: bookFloat 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-3d,
+  .book-3d img,
+  .book-floating {
+    animation: none;
+    transition: none;
+  }
+}
+
