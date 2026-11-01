@@ -6,6 +6,7 @@
 .admin-header h1 {
   margin-bottom: 8px;
   font-size: clamp(27px, 6vw, 36px);
+  letter-spacing: -.7px;
 }
 
 .admin-header p {
@@ -15,11 +16,13 @@
 }
 
 .admin-panel {
+  min-width: 0;
   margin: 20px 0;
   padding: 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
+  box-shadow: 0 12px 30px var(--shadow);
 }
 
 .admin-panel h2 {
@@ -34,6 +37,7 @@
 }
 
 .admin-stat {
+  min-width: 0;
   padding: 17px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -50,6 +54,7 @@
 .admin-stat strong {
   color: var(--gold);
   font-size: 23px;
+  overflow-wrap: anywhere;
 }
 
 .admin-form {
@@ -59,6 +64,7 @@
 }
 
 .admin-form label {
+  display: block;
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
@@ -68,6 +74,7 @@
 .admin-form textarea,
 .admin-form select {
   width: 100%;
+  min-height: 46px;
   margin-top: 7px;
   padding: 13px;
   border: 1px solid var(--border);
@@ -76,12 +83,14 @@
   background: var(--surface-raised);
   color: var(--text);
   font-size: 13px;
+  transition: border-color .25s ease, box-shadow .25s ease;
 }
 
 .admin-form input:focus,
 .admin-form textarea:focus,
 .admin-form select:focus {
   border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(216, 182, 92, .1);
 }
 
 .admin-form textarea {
@@ -92,6 +101,7 @@
 .admin-table-wrap {
   width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
 }
@@ -126,6 +136,7 @@
 }
 
 .admin-action {
+  min-height: 40px;
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -133,10 +144,22 @@
   color: var(--text);
   font-size: 12px;
   font-weight: 600;
+  cursor: pointer;
+  transition: border-color .25s ease, transform .2s ease;
+}
+
+.admin-action:hover,
+.admin-action:active {
+  border-color: var(--gold);
 }
 
 .admin-action:active {
-  border-color: var(--gold);
+  transform: scale(.97);
+}
+
+.admin-action:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 
 .admin-warning {
@@ -159,3 +182,11 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .admin-form input,
+  .admin-form textarea,
+  .admin-form select,
+  .admin-action {
+    transition: none;
+  }
+}
