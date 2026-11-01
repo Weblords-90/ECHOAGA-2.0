@@ -28,7 +28,6 @@
 </head>
 
 <body data-theme="basic">
-
   <main id="app">
 
     <section id="home" data-screen="home" class="screen active">
@@ -53,11 +52,13 @@
       <section class="home-section">
         <h2 class="home-section-title">Explore your universe</h2>
         <p class="home-subtitle">Discover stories across different worlds and genres.</p>
+        <div id="homeBookGrid" class="echoaga-book-grid"></div>
       </section>
 
       <section class="home-section">
         <h2 class="home-section-title">Continue listening</h2>
-        <p class="home-subtitle">Your listening journey will appear here.</p>
+        <p class="home-subtitle">Pick up where your journey begins.</p>
+        <div id="continueBookGrid" class="echoaga-book-grid"></div>
       </section>
 
       <section class="home-section about-section" id="aboutEchoaga">
@@ -183,7 +184,6 @@
     </section>
 
     <section id="profile" data-screen="profile" class="screen">
-
       <header class="profile-header">
         <div class="profile-eyebrow">
           <span>YOUR PERSONAL SPACE</span>
@@ -228,12 +228,10 @@
             <span class="profile-kicker">PERSONAL SPACE</span>
             <h2>Your Account</h2>
           </div>
-
           <span class="profile-section-number">01</span>
         </div>
 
         <div class="profile-menu">
-
           <div class="profile-menu-item">
             <div class="profile-menu-icon">◈</div>
             <div class="profile-menu-info">
@@ -260,23 +258,19 @@
             </div>
             <span class="profile-menu-arrow">›</span>
           </div>
-
         </div>
       </section>
 
       <section class="profile-section profile-premium-section">
-
         <div class="profile-section-heading">
           <div>
             <span class="profile-kicker">THE NEXT LEVEL</span>
             <h2>ECHOAGA Premium</h2>
           </div>
-
           <span class="profile-section-number">02</span>
         </div>
 
         <div class="profile-premium-card">
-
           <div class="profile-premium-top">
             <span class="profile-premium-label">EXCLUSIVE EXPERIENCE</span>
             <span class="profile-premium-symbol">✦</span>
@@ -294,7 +288,6 @@
             <span>THE WORLD OF ECHOAGA</span>
             <span>PREMIUM ✦</span>
           </div>
-
         </div>
       </section>
 
@@ -302,7 +295,6 @@
         <span>CRAFTED FOR STORY LOVERS</span>
         <span>ECHOAGA © 2026</span>
       </div>
-
     </section>
 
     <section id="settings" data-screen="settings" class="screen">
@@ -398,7 +390,7 @@
 
   <script type="module" src="js/auth.js"></script>
   <script type="module" src="firebase.js"></script>
+  <script type="module" src="js/books.js"></script>
   <script type="module" src="js/app.js"></script>
-
 </body>
 </html>
