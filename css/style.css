@@ -77,3 +77,43 @@ img {
   min-height: 100vh;
 }
 
+
+:root {
+  --radius-small: 12px;
+  --radius-medium: 16px;
+  --radius-large: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: var(--radius-medium);
+}
+
+.home-featured,
+.discover-placeholder,
+.library-category,
+.profile-hero,
+.profile-menu,
+.profile-menu-item,
+.profile-premium-card,
+.settings-option,
+#authPanel {
+  border-radius: var(--radius-large);
+}
+
+.discover-search,
+.library-search {
+  border-radius: var(--radius-pill);
+}
+
+.profile-avatar {
+  border-radius: 50%;
+}
+
+#bottomNavigation button {
+  border-radius: var(--radius-pill);
+}
