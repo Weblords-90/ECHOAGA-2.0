@@ -1,30 +1,62 @@
+
 :root {
-  --basic-bg: #10251b;
-  --basic-surface: #193b2b;
-  --basic-gold: #d6b65c;
-  --basic-text: #f3f0e5;
-
-  --premium-bg: #080808;
-  --premium-surface: #171717;
-  --premium-gold: #e2bd65;
-  --premium-text: #f5f0e5;
-
-  --bg: var(--basic-bg);
-  --surface: var(--basic-surface);
-  --gold: var(--basic-gold);
-  --text: var(--basic-text);
+  color-scheme: dark;
+  --bg: #0b1711;
+  --bg-soft: #10251a;
+  --surface: #162d20;
+  --surface-raised: #1c3828;
+  --surface-glass: rgba(22, 45, 32, 0.78);
+  --gold: #d8b65c;
+  --gold-light: #f1d98e;
+  --gold-dark: #a98736;
+  --text: #f5f1e5;
+  --muted: #a8b1a8;
+  --border: rgba(216, 182, 92, 0.16);
+  --shadow: rgba(0, 0, 0, 0.28);
+  --gradient: linear-gradient(135deg, #203d2b, #10251a);
+  --gold-gradient: linear-gradient(135deg, #f1d98e, #c49a43);
+  --radius: 20px;
+  --radius-small: 12px;
+  --transition: 0.3s ease;
 }
 
 body[data-theme="basic"] {
-  --bg: var(--basic-bg);
-  --surface: var(--basic-surface);
-  --gold: var(--basic-gold);
-  --text: var(--basic-text);
+  --bg: #0b1711;
+  --bg-soft: #10251a;
+  --surface: #162d20;
+  --surface-raised: #1c3828;
+  --surface-glass: rgba(22, 45, 32, 0.78);
+  --gold: #d8b65c;
+  --gold-light: #f1d98e;
+  --gold-dark: #a98736;
+  --text: #f5f1e5;
+  --muted: #a8b1a8;
+  --border: rgba(216, 182, 92, 0.16);
+  --shadow: rgba(0, 0, 0, 0.28);
+  --gradient: linear-gradient(135deg, #203d2b, #10251a);
+  --gold-gradient: linear-gradient(135deg, #f1d98e, #c49a43);
 }
 
 body[data-theme="premium"] {
-  --bg: var(--premium-bg);
-  --surface: var(--premium-surface);
-  --gold: var(--premium-gold);
-  --text: var(--premium-text);
+  --bg: #080808;
+  --bg-soft: #101010;
+  --surface: #171717;
+  --surface-raised: #222222;
+  --surface-glass: rgba(23, 23, 23, 0.82);
+  --gold: #e2bd65;
+  --gold-light: #f6df9d;
+  --gold-dark: #ad8437;
+  --text: #f7f3e9;
+  --muted: #a5a19a;
+  --border: rgba(226, 189, 101, 0.2);
+  --shadow: rgba(0, 0, 0, 0.55);
+  --gradient: linear-gradient(135deg, #242424, #101010);
+  --gold-gradient: linear-gradient(135deg, #f6df9d, #c49a43);
 }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
