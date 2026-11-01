@@ -2,7 +2,7 @@
 #miniPlayer {
   position: fixed;
   right: 12px;
-  bottom: 88px;
+  bottom: calc(88px + env(safe-area-inset-bottom));
   left: 12px;
   z-index: 900;
   display: flex;
@@ -13,9 +13,13 @@
   border: 1px solid var(--border);
   border-radius: 17px;
   background: var(--surface-raised);
-  box-shadow: var(--shadow);
+  box-shadow: 0 12px 35px var(--shadow);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+}
+
+#miniPlayer[hidden] {
+  display: none !important;
 }
 
 .mini-player-art {
@@ -55,6 +59,7 @@
 
 .mini-player-controls {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 9px;
 }
@@ -64,11 +69,13 @@
   place-items: center;
   width: 35px;
   height: 35px;
+  padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
   color: var(--text);
   font-size: 17px;
+  transition: transform .2s ease, background .2s ease;
 }
 
 .mini-player-controls .play-button {
@@ -95,7 +102,7 @@
   background:
     radial-gradient(circle at 50% 35%, rgba(207, 169, 79, .2), transparent 55%),
     linear-gradient(145deg, var(--surface-raised), var(--surface));
-  box-shadow: var(--shadow);
+  box-shadow: 0 18px 45px var(--shadow);
   color: var(--gold);
   font-size: 75px;
 }
@@ -119,7 +126,9 @@
 
 .player-progress input[type="range"] {
   width: 100%;
+  min-height: 24px;
   accent-color: var(--gold);
+  cursor: pointer;
 }
 
 .player-time {
@@ -142,11 +151,13 @@
   place-items: center;
   width: 48px;
   height: 48px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 50%;
   background: var(--surface);
   color: var(--text);
   font-size: 18px;
+  transition: transform .2s ease, background .2s ease;
 }
 
 .player-controls .main-play-button {
@@ -163,31 +174,23 @@
   transform: scale(.92);
 }
 
-@media (min-width: 768px) {
-  #miniPlayer {
-    right: auto;
-    left: 50%;
-    width: min(660px, calc(100% - 32px));
-    transform: translateX(-50%);
-  }
-
-  .player-screen {
-    padding-top: 35px;
-  }
-}
-#miniPlayer[hidden] {
-  display: none !important;
-}
-
 .mini-player-controls button:focus-visible,
 .player-controls button:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
-.player-progress input[type="range"] {
-  cursor: pointer;
-  min-height: 24px;
+@media (min-width: 768px) {
+  #miniPlayer {
+    right: auto;
+    left: 50%;
+    width: min(660px, calc(100% - 40px));
+    transform: translateX(-50%);
+  }
+
+  .player-screen {
+    padding-top: 35px;
+  }
 }
 
 @media (max-width: 380px) {
@@ -203,5 +206,12 @@
   .mini-player-controls button {
     width: 32px;
     height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mini-player-controls button,
+  .player-controls button {
+    transition: none;
   }
 }
