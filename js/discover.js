@@ -26,6 +26,11 @@ function initializeDiscover() {
         ? "Audiobook search will be available when our catalogue is added."
         : "";
       status.hidden = !query;
+
+      discover.querySelectorAll(".discover-section").forEach(section => {
+        section.hidden = false;
+      });
+
       return;
     }
 
@@ -33,11 +38,10 @@ function initializeDiscover() {
 
     cards.forEach(card => {
       const searchableText = (
-        card.dataset.search ||
-        card.textContent
+        card.dataset.search || card.textContent || ""
       ).toLowerCase();
 
-      const matches = searchableText.includes(query);
+      const matches = !query || searchableText.includes(query);
 
       card.hidden = !matches;
 
@@ -47,20 +51,26 @@ function initializeDiscover() {
     discover.querySelectorAll(".discover-section").forEach(section => {
       const sectionCards = [...section.querySelectorAll("[data-book-card]")];
 
-      if (sectionCards.length > 0) {
-        section.hidden = !sectionCards.some(card => !card.hidden);
-      }
+      section.hidden = query !== "" &&
+        sectionCards.length > 0 &&
+        !sectionCards.some(card => !card.hidden);
     });
+
+    if (!query) {
+      status.textContent = "";
+      status.hidden = true;
+      return;
+    }
 
     status.textContent = visibleCount === 0
       ? "No audiobooks found. Try another search."
       : `${visibleCount} audiobook${visibleCount === 1 ? "" : "s"} found.`;
 
-    status.hidden = !query;
+    status.hidden = false;
   }
 
   searchInput.addEventListener("input", searchAudiobooks);
 }
 
 export { initializeDiscover };
-
+                                                             
