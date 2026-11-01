@@ -59,28 +59,28 @@ const libraryCategories = {
 
 const demoBooks = {
   psychology: [
-    { title: "The Quiet Mind", author: "A. Rowan", color: "#244b3b", accent: "#d5b66c", symbol: "◉" },
-    { title: "Inside the Human Mind", author: "E. Morgan", color: "#24364b", accent: "#c6a76a", symbol: "✧" }
+    { id: "quiet-mind", title: "The Quiet Mind", author: "A. Rowan", color: "#244b3b", accent: "#d5b66c", symbol: "◉" },
+    { id: "human-mind", title: "Inside the Human Mind", author: "E. Morgan", color: "#24364b", accent: "#c6a76a", symbol: "✧" }
   ],
   "self-improvement": [
-    { title: "The Next Version", author: "J. Vale", color: "#31513d", accent: "#dfc27b", symbol: "✦" },
-    { title: "Small Wins", author: "M. Ellis", color: "#4b3827", accent: "#e0b96d", symbol: "↗" }
+    { id: "next-version", title: "The Next Version", author: "J. Vale", color: "#31513d", accent: "#dfc27b", symbol: "✦" },
+    { id: "small-wins", title: "Small Wins", author: "M. Ellis", color: "#4b3827", accent: "#e0b96d", symbol: "↗" }
   ],
   manga: [
-    { title: "The Last Starblade", author: "K. Arashi", color: "#382b50", accent: "#d9b86d", symbol: "刀" },
-    { title: "Echoes of Kairo", author: "R. Sato", color: "#263e54", accent: "#d5b66c", symbol: "月" }
+    { id: "starblade", title: "The Last Starblade", author: "K. Arashi", color: "#382b50", accent: "#d9b86d", symbol: "刀" },
+    { id: "echoes-kairo", title: "Echoes of Kairo", author: "R. Sato", color: "#263e54", accent: "#d5b66c", symbol: "月" }
   ],
   novels: [
-    { title: "A Thousand Autumns", author: "L. Winters", color: "#5a343b", accent: "#e2bd79", symbol: "❧" },
-    { title: "The Glass Garden", author: "N. Hart", color: "#315247", accent: "#d7c18a", symbol: "❀" }
+    { id: "thousand-autumns", title: "A Thousand Autumns", author: "L. Winters", color: "#5a343b", accent: "#e2bd79", symbol: "❧" },
+    { id: "glass-garden", title: "The Glass Garden", author: "N. Hart", color: "#315247", accent: "#d7c18a", symbol: "❀" }
   ],
   mystery: [
-    { title: "The Silent Key", author: "C. Blackwood", color: "#292e3d", accent: "#d5b66c", symbol: "⌘" },
-    { title: "Midnight at Hollow Lane", author: "I. Graves", color: "#49313a", accent: "#d6b875", symbol: "☾" }
+    { id: "silent-key", title: "The Silent Key", author: "C. Blackwood", color: "#292e3d", accent: "#d5b66c", symbol: "⌘" },
+    { id: "hollow-lane", title: "Midnight at Hollow Lane", author: "I. Graves", color: "#49313a", accent: "#d6b875", symbol: "☾" }
   ],
   "sci-fi": [
-    { title: "Beyond the Red Moon", author: "T. Orion", color: "#263d55", accent: "#e0bd70", symbol: "☄" },
-    { title: "The Memory Engine", author: "A. Nova", color: "#34304f", accent: "#d9b86d", symbol: "⌬" }
+    { id: "red-moon", title: "Beyond the Red Moon", author: "T. Orion", color: "#263d55", accent: "#e0bd70", symbol: "☄" },
+    { id: "memory-engine", title: "The Memory Engine", author: "A. Nova", color: "#34304f", accent: "#d9b86d", symbol: "⌬" }
   ]
 };
 
@@ -102,7 +102,7 @@ export function initializeLibrary() {
     const backButton = document.createElement("button");
     backButton.type = "button";
     backButton.className = "library-back";
-    backButton.dataset.libraryBack = "";
+    backButton.dataset.libraryBack = "categories";
     backButton.textContent = "← Back to Library";
 
     const heading = document.createElement("h2");
@@ -126,6 +126,10 @@ export function initializeLibrary() {
   function createBookCard(book) {
     const card = document.createElement("article");
     card.className = "echoaga-book-card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `View ${book.title}`);
+    card.dataset.echoagaBook = book.id;
 
     const bookElement = document.createElement("div");
     bookElement.className = "echoaga-book";
@@ -179,7 +183,7 @@ export function initializeLibrary() {
     const backButton = document.createElement("button");
     backButton.type = "button";
     backButton.className = "library-back";
-    backButton.dataset.libraryBack = "";
+    backButton.dataset.libraryBack = "subcategories";
     backButton.textContent = "← Back to Categories";
 
     const heading = document.createElement("h2");
@@ -199,6 +203,8 @@ export function initializeLibrary() {
     section.append(backButton, heading, description, grid);
   }
 
+  let activeCategory = null;
+
   section.addEventListener("click", event => {
     if (!(event.target instanceof Element)) return;
 
@@ -207,27 +213,30 @@ export function initializeLibrary() {
     const subcategoryButton = event.target.closest("[data-subcategory]");
 
     if (backButton && section.contains(backButton)) {
-      renderCategories();
+      if (backButton.dataset.libraryBack === "subcategories" && activeCategory) {
+        renderSubcategories(libraryCategories[activeCategory]);
+      } else {
+        activeCategory = null;
+        renderCategories();
+      }
       return;
     }
 
     if (categoryButton && section.contains(categoryButton)) {
-      const category = libraryCategories[categoryButton.dataset.category];
+      const key = categoryButton.dataset.category;
+      const category = libraryCategories[key];
 
       if (!category) return;
 
+      activeCategory = key;
       renderSubcategories(category);
       return;
     }
 
     if (subcategoryButton && section.contains(subcategoryButton)) {
-      const activeCategory = Object.entries(libraryCategories).find(
-        ([, category]) => category.subcategories.includes(subcategoryButton.dataset.subcategory)
-      );
-
       if (!activeCategory) return;
 
-      renderBooks(activeCategory[0], subcategoryButton.dataset.subcategory);
+      renderBooks(activeCategory, subcategoryButton.dataset.subcategory);
     }
   });
 }
