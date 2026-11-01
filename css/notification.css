@@ -1,0 +1,92 @@
+
+#notificationContainer {
+  position: fixed;
+  top: 20px;
+  right: 16px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(360px, calc(100% - 32px));
+  pointer-events: none;
+}
+
+.echoaga-notification {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 14px;
+  background: #101713;
+  color: #f4f0df;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  animation: notificationEnter 0.35s ease forwards;
+}
+
+.echoaga-notification.success {
+  border-left: 3px solid #69c98b;
+}
+
+.echoaga-notification.error {
+  border-left: 3px solid #e47777;
+}
+
+.echoaga-notification.info {
+  border-left: 3px solid #d4af37;
+}
+
+.echoaga-notification-icon {
+  flex-shrink: 0;
+  color: #d4af37;
+  font-size: 20px;
+}
+
+.echoaga-notification-message {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.echoaga-notification-close {
+  border: 0;
+  background: transparent;
+  color: #b9b9ae;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.echoaga-notification-close:hover {
+  color: #ffffff;
+}
+
+.echoaga-notification.removing {
+  animation: notificationExit 0.25s ease forwards;
+}
+
+@keyframes notificationEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes notificationExit {
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+@media (max-width: 480px) {
+  #notificationContainer {
+    top: 12px;
+    right: 12px;
+    width: calc(100% - 24px);
+  }
+}
