@@ -44,7 +44,7 @@
       <div class="home-featured">
         <h3>Discover your next obsession.</h3>
         <p>Stories, ideas and unforgettable journeys are waiting for you.</p>
-        <button type="button" data-screen="discover" onclick="document.querySelector('[data-screen=discover]').click()">Explore Universe</button>
+        <button type="button" onclick="document.querySelector('#bottomNavigation [data-screen=discover]').click()">Explore Universe</button>
       </div>
 
       <section class="home-section">
@@ -64,7 +64,13 @@
         <p class="discover-description">Find your next unforgettable listening experience.</p>
       </header>
 
-      <input type="search" class="discover-search" placeholder="Search books, authors and genres..." aria-label="Search audiobooks">
+      <input
+        type="search"
+        id="discoverSearch"
+        class="discover-search"
+        placeholder="Search books, authors and genres..."
+        aria-label="Search audiobooks"
+      >
 
       <section class="discover-section">
         <h2>Made for your curiosity</h2>
@@ -88,32 +94,42 @@
         <p class="library-description">Explore worlds of knowledge, imagination and discovery.</p>
       </header>
 
-      <input type="search" class="library-search" placeholder="Search your universe..." aria-label="Search library">
+      <input
+        type="search"
+        class="library-search"
+        placeholder="Search your universe..."
+        aria-label="Search library"
+      >
 
       <section class="library-category-section">
         <h2>Explore Categories</h2>
 
-        <div class="library-category-grid">
+        <div class="library-categories">
           <button class="library-category" type="button" data-category="psychology">
             <h3>Psychology</h3>
             <p>Understand the human mind</p>
           </button>
+
           <button class="library-category" type="button" data-category="self-improvement">
             <h3>Self-Improvement</h3>
             <p>Build a better version of yourself</p>
           </button>
+
           <button class="library-category" type="button" data-category="manga">
             <h3>Manga</h3>
             <p>Enter illustrated worlds</p>
           </button>
+
           <button class="library-category" type="button" data-category="novels">
             <h3>Novels</h3>
             <p>Stories that stay with you</p>
           </button>
+
           <button class="library-category" type="button" data-category="mystery">
             <h3>Mystery</h3>
             <p>Uncover the unknown</p>
           </button>
+
           <button class="library-category" type="button" data-category="sci-fi">
             <h3>Sci-Fi</h3>
             <p>Explore beyond reality</p>
@@ -159,12 +175,14 @@
 
       <section class="settings-section">
         <h2>Appearance</h2>
+
         <button class="settings-option" type="button" data-theme-choice="basic">
           <div>
             <strong>Basic Theme</strong>
             <span>Green and gold</span>
           </div>
         </button>
+
         <button class="settings-option" type="button" data-theme-choice="premium">
           <div>
             <strong>Premium Theme</strong>
@@ -240,69 +258,9 @@
     <button type="button" data-screen="settings">Settings</button>
   </nav>
 
-  <script>
-    const authOverlay = document.getElementById("authOverlay");
-    const loginForm = document.getElementById("loginForm");
-    const signupForm = document.getElementById("signupForm");
-    const authMessage = document.getElementById("authMessage");
-
-    function openAuth() {
-      authOverlay.hidden = false;
-      showLogin();
-    }
-
-    function closeAuth() {
-      authOverlay.hidden = true;
-    }
-
-    function showLogin() {
-      loginForm.hidden = false;
-      signupForm.hidden = true;
-      authMessage.textContent = "";
-      document.getElementById("authTitle").textContent = "Welcome Back";
-    }
-
-    function showSignup() {
-      loginForm.hidden = true;
-      signupForm.hidden = false;
-      authMessage.textContent = "";
-      document.getElementById("authTitle").textContent = "Create Your Account";
-    }
-
-    function showAuthMessage(message, isError = false) {
-      authMessage.textContent = message;
-      authMessage.dataset.error = String(isError);
-    }
-
-    function clearAuthMessage() {
-      authMessage.textContent = "";
-      authMessage.dataset.error = "false";
-    }
-
-    function setBusy(button, busy, label) {
-      button.disabled = busy;
-      button.textContent = busy ? "PLEASE WAIT..." : label;
-    }
-
-    function friendlyError(error) {
-      const messages = {
-        "auth/email-already-in-use": "This email already has an account.",
-        "auth/invalid-email": "Please enter a valid email address.",
-        "auth/invalid-credential": "Email or password is incorrect.",
-        "auth/weak-password": "Please choose a stronger password.",
-        "auth/network-request-failed": "Network error. Please try again."
-      };
-      return messages[error.code] || "Something went wrong. Please try again.";
-    }
-
-    function updateProfileName(name) {
-      document.getElementById("profileName").textContent = name || "Welcome to ECHOAGA";
-    }
-  </script>
-<script type="module" src="js/auth.js"></script>
-<script type="module" src="firebase.js"></script>
-<script type="module" src="js/app.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="js/app.js"></script>
 
 </body>
-      </html>
-      
+</html>
