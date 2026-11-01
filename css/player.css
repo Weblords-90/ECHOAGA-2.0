@@ -175,4 +175,33 @@
     padding-top: 35px;
   }
 }
+#miniPlayer[hidden] {
+  display: none !important;
+}
 
+.mini-player-controls button:focus-visible,
+.player-controls button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.player-progress input[type="range"] {
+  cursor: pointer;
+  min-height: 24px;
+}
+
+@media (max-width: 380px) {
+  #miniPlayer {
+    gap: 8px;
+    padding: 9px 10px;
+  }
+
+  .mini-player-controls {
+    gap: 5px;
+  }
+
+  .mini-player-controls button {
+    width: 32px;
+    height: 32px;
+  }
+}
