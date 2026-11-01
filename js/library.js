@@ -1,3 +1,4 @@
+
 const libraryCategories = {
   psychology: {
     title: "Psychology",
@@ -65,30 +66,42 @@ export function initializeLibrary() {
   const originalContent = section.innerHTML;
 
   section.addEventListener("click", event => {
-    const categoryButton = event.target.closest("[data-category]");
     const backButton = event.target.closest("[data-library-back]");
+    const categoryButton = event.target.closest("[data-category]");
+    const subcategoryButton = event.target.closest("[data-subcategory]");
 
     if (backButton) {
       section.innerHTML = originalContent;
       return;
     }
 
-    if (!categoryButton) return;
+    if (categoryButton) {
+      const category = libraryCategories[categoryButton.dataset.category];
 
-    const category = libraryCategories[categoryButton.dataset.category];
+      if (!category) return;
 
-    if (!category) return;
+      section.innerHTML = `
+        <button type="button" data-library-back class="library-back">← Back to Library</button>
+        <h2>${category.title}</h2>
+        <div class="library-subcategories">
+          ${category.subcategories.map(item => `
+            <button type="button" class="library-subcategory" data-subcategory="${item}">
+              ${item}
+            </button>
+          `).join("")}
+        </div>
+      `;
+      return;
+    }
 
-    section.innerHTML = `
-      <button type="button" data-library-back class="library-back">← Back to Library</button>
-      <h2>${category.title}</h2>
-      <div class="library-category-grid">
-        ${category.subcategories.map(item => `
-          <button type="button" class="library-category">
-            <h3>${item}</h3>
-          </button>
-        `).join("")}
-      </div>
-    `;
+    if (subcategoryButton) {
+      section.innerHTML = `
+        <button type="button" data-library-back class="library-back">← Back to Categories</button>
+        <h2>${subcategoryButton.dataset.subcategory}</h2>
+        <div class="library-empty">
+          Audiobooks in this category will appear here.
+        </div>
+      `;
+    }
   });
 }
