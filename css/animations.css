@@ -105,3 +105,31 @@
     transition-duration: .01ms !important;
   }
 }
+@keyframes bookFloat {
+  0%, 100% {
+    transform: translateY(0) rotateY(-12deg) rotateX(5deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateY(-7deg) rotateX(2deg);
+  }
+}
+
+@keyframes bookShine {
+  0%, 100% {
+    opacity: .25;
+  }
+  50% {
+    opacity: .65;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-book-3d {
+    animation: bookFloat 5s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
+
+  .home-book-3d::after {
+    animation: bookShine 4s ease-in-out infinite;
+  }
+}
