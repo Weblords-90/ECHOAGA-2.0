@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#10251b">
+  <meta name="description" content="ECHOAGA — Enter a universe of unforgettable audio stories.">
   <title>ECHOAGA — Your Audio Universe</title>
 
   <link rel="stylesheet" href="css/style.css">
@@ -29,6 +31,11 @@
     <section id="home" data-screen="home" class="screen active">
       <header class="home-header">
         <div class="home-brand">ECHOAGA</div>
+        <button type="button" id="accountButton" onclick="openAuth()">Sign In</button>
+        <div id="userPill" hidden>
+          <span id="userLabel"></span>
+          <button type="button" id="logoutButton" onclick="logoutUser()">Log Out</button>
+        </div>
       </header>
 
       <h1 class="home-greeting">Your world.<br>Your stories.</h1>
@@ -37,6 +44,7 @@
       <div class="home-featured">
         <h3>Discover your next obsession.</h3>
         <p>Stories, ideas and unforgettable journeys are waiting for you.</p>
+        <button type="button" data-screen="discover" onclick="document.querySelector('[data-screen=discover]').click()">Explore Universe</button>
       </div>
 
       <section class="home-section">
@@ -56,32 +64,21 @@
         <p class="discover-description">Find your next unforgettable listening experience.</p>
       </header>
 
-      <input
-        type="search"
-        class="discover-search"
-        placeholder="Search books, authors and genres..."
-        aria-label="Search audiobooks"
-      >
+      <input type="search" class="discover-search" placeholder="Search books, authors and genres..." aria-label="Search audiobooks">
 
       <section class="discover-section">
         <h2>Made for your curiosity</h2>
-        <div class="discover-placeholder">
-          Your next favourite story is waiting to be discovered.
-        </div>
+        <div class="discover-placeholder">Your next favourite story is waiting to be discovered.</div>
       </section>
 
       <section class="discover-section">
         <h2>Popular right now</h2>
-        <div class="discover-placeholder">
-          Popular audiobooks will appear here.
-        </div>
+        <div class="discover-placeholder">Popular audiobooks will appear here.</div>
       </section>
 
       <section class="discover-section">
         <h2>Explore by mood</h2>
-        <div class="discover-placeholder">
-          Discover stories that match your mood.
-        </div>
+        <div class="discover-placeholder">Discover stories that match your mood.</div>
       </section>
     </section>
 
@@ -91,48 +88,36 @@
         <p class="library-description">Explore worlds of knowledge, imagination and discovery.</p>
       </header>
 
-      <input
-        type="search"
-        class="library-search"
-        placeholder="Search your universe..."
-        aria-label="Search library"
-      >
+      <input type="search" class="library-search" placeholder="Search your universe..." aria-label="Search library">
 
       <section class="library-category-section">
         <h2>Explore Categories</h2>
 
         <div class="library-category-grid">
-
           <button class="library-category" type="button" data-category="psychology">
             <h3>Psychology</h3>
             <p>Understand the human mind</p>
           </button>
-
           <button class="library-category" type="button" data-category="self-improvement">
             <h3>Self-Improvement</h3>
             <p>Build a better version of yourself</p>
           </button>
-
           <button class="library-category" type="button" data-category="manga">
             <h3>Manga</h3>
             <p>Enter illustrated worlds</p>
           </button>
-
           <button class="library-category" type="button" data-category="novels">
             <h3>Novels</h3>
             <p>Stories that stay with you</p>
           </button>
-
           <button class="library-category" type="button" data-category="mystery">
             <h3>Mystery</h3>
             <p>Uncover the unknown</p>
           </button>
-
           <button class="library-category" type="button" data-category="sci-fi">
             <h3>Sci-Fi</h3>
             <p>Explore beyond reality</p>
           </button>
-
         </div>
       </section>
     </section>
@@ -145,8 +130,9 @@
 
       <div class="profile-card">
         <div class="profile-avatar">E</div>
-        <h2>Welcome to ECHOAGA</h2>
+        <h2 id="profileName">Welcome to ECHOAGA</h2>
         <p>Your listening journey starts here.</p>
+        <button type="button" onclick="openAuth()">Sign In / Create Account</button>
       </div>
 
       <section class="profile-section">
@@ -173,14 +159,12 @@
 
       <section class="settings-section">
         <h2>Appearance</h2>
-
         <button class="settings-option" type="button" data-theme-choice="basic">
           <div>
             <strong>Basic Theme</strong>
             <span>Green and gold</span>
           </div>
         </button>
-
         <button class="settings-option" type="button" data-theme-choice="premium">
           <div>
             <strong>Premium Theme</strong>
@@ -206,17 +190,119 @@
 
   </main>
 
+  <div id="authOverlay" hidden>
+    <div id="authPanel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button type="button" onclick="closeAuth()" aria-label="Close">×</button>
+
+      <h2 id="authTitle">Welcome to ECHOAGA</h2>
+      <p id="authMessage" role="status" aria-live="polite"></p>
+
+      <div>
+        <button type="button" onclick="showLogin()">Sign In</button>
+        <button type="button" onclick="showSignup()">Create Account</button>
+      </div>
+
+      <form id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" autocomplete="email" required>
+
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required>
+
+        <button type="submit" id="loginSubmit">SIGN IN TO ECHOAGA</button>
+        <button type="button" onclick="resetPassword()">Forgot your password?</button>
+      </form>
+
+      <form id="signupForm" hidden>
+        <label for="signupName">Your Name</label>
+        <input id="signupName" type="text" autocomplete="name" required>
+
+        <label for="signupEmail">Email</label>
+        <input id="signupEmail" type="email" autocomplete="email" required>
+
+        <label for="signupPassword">Password</label>
+        <input id="signupPassword" type="password" autocomplete="new-password" minlength="6" required>
+
+        <button type="submit" id="signupSubmit">CREATE MY ACCOUNT</button>
+      </form>
+
+      <button type="button" id="googleButton" onclick="googleSignIn()">Continue with Google</button>
+    </div>
+  </div>
+
   <div id="miniPlayer" hidden></div>
 
-  <nav id="bottomNavigation">
-    <button data-screen="home">Home</button>
-    <button data-screen="discover">Discover</button>
-    <button data-screen="library">Library</button>
-    <button data-screen="profile">Profile</button>
-    <button data-screen="settings">Settings</button>
+  <nav id="bottomNavigation" aria-label="Main navigation">
+    <button type="button" data-screen="home" class="active">Home</button>
+    <button type="button" data-screen="discover">Discover</button>
+    <button type="button" data-screen="library">Library</button>
+    <button type="button" data-screen="profile">Profile</button>
+    <button type="button" data-screen="settings">Settings</button>
   </nav>
 
+  <script>
+    const authOverlay = document.getElementById("authOverlay");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const authMessage = document.getElementById("authMessage");
+
+    function openAuth() {
+      authOverlay.hidden = false;
+      showLogin();
+    }
+
+    function closeAuth() {
+      authOverlay.hidden = true;
+    }
+
+    function showLogin() {
+      loginForm.hidden = false;
+      signupForm.hidden = true;
+      authMessage.textContent = "";
+      document.getElementById("authTitle").textContent = "Welcome Back";
+    }
+
+    function showSignup() {
+      loginForm.hidden = true;
+      signupForm.hidden = false;
+      authMessage.textContent = "";
+      document.getElementById("authTitle").textContent = "Create Your Account";
+    }
+
+    function showAuthMessage(message, isError = false) {
+      authMessage.textContent = message;
+      authMessage.dataset.error = String(isError);
+    }
+
+    function clearAuthMessage() {
+      authMessage.textContent = "";
+      authMessage.dataset.error = "false";
+    }
+
+    function setBusy(button, busy, label) {
+      button.disabled = busy;
+      button.textContent = busy ? "PLEASE WAIT..." : label;
+    }
+
+    function friendlyError(error) {
+      const messages = {
+        "auth/email-already-in-use": "This email already has an account.",
+        "auth/invalid-email": "Please enter a valid email address.",
+        "auth/invalid-credential": "Email or password is incorrect.",
+        "auth/weak-password": "Please choose a stronger password.",
+        "auth/network-request-failed": "Network error. Please try again."
+      };
+      return messages[error.code] || "Something went wrong. Please try again.";
+    }
+
+    function updateProfileName(name) {
+      document.getElementById("profileName").textContent = name || "Welcome to ECHOAGA";
+    }
+  </script>
+
+  <script type="module" src="firebase.js"></script>
   <script type="module" src="js/app.js"></script>
 
 </body>
-</html>
+      </html>
+      
