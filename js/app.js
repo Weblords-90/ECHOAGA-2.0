@@ -1,7 +1,7 @@
 
 import { initializeNavigation } from "./navigation.js";
 import { initializeLibrary } from "./library.js";
-
+import { initializeDiscover } from "./discover.js";
 const app = document.getElementById("app");
 
 const state = {
@@ -53,7 +53,9 @@ function initializeApp() {
   applyTheme(state.theme);
   initializeNavigation(navigateTo);
   initializeLibrary();
+  initializeDiscover();
   navigateTo(state.currentScreen);
+  
 
   document.addEventListener("click", event => {
     const themeButton = event.target.closest("[data-theme-choice]");
