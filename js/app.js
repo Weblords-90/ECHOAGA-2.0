@@ -2,6 +2,7 @@
 import { initializeNavigation } from "./navigation.js";
 import { initializeLibrary } from "./library.js";
 import { initializeDiscover } from "./discover.js";
+import { initializePlayer } from "./player.js";
 const app = document.getElementById("app");
 
 const state = {
@@ -54,6 +55,7 @@ function initializeApp() {
   initializeNavigation(navigateTo);
   initializeLibrary();
   initializeDiscover();
+  initializePlayer();
   navigateTo(state.currentScreen);
   
 
