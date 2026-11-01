@@ -1,0 +1,50 @@
+
+[data-bookmark-id] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d4af37;
+  font-size: 21px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+[data-bookmark-id]:active {
+  transform: scale(0.88);
+}
+
+[data-bookmark-id].bookmarked {
+  background: rgba(212, 175, 55, 0.14);
+  color: #e6c45a;
+  border-color: #d4af37;
+}
+
+[data-bookmark-id]:focus-visible {
+  outline: 2px solid #d4af37;
+  outline-offset: 3px;
+}
+
+[data-bookmark-id]:hover {
+  background: rgba(212, 175, 55, 0.12);
+}
+
+[data-bookmark-id].bookmarked {
+  animation: bookmarkPop 0.3s ease;
+}
+
+@keyframes bookmarkPop {
+  0% {
+    transform: scale(0.85);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
