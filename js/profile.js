@@ -7,13 +7,11 @@ function initializeProfile() {
   const accountButton = document.getElementById("accountButton");
   const userLabel = document.getElementById("userLabel");
 
-  if (!profileName || !profileAvatar || !userPill || !accountButton) return;
+  if (!profileName || !profileAvatar || !userPill || !accountButton || !userLabel) return;
 
   function updateProfile() {
     const loggedIn = userPill.style.display === "flex";
-    const name = loggedIn
-      ? userLabel.textContent.trim()
-      : "Welcome to ECHOAGA";
+    const name = loggedIn ? userLabel.textContent.trim() : "Welcome to ECHOAGA";
 
     profileName.textContent = name || "Welcome to ECHOAGA";
     profileAvatar.textContent = loggedIn && name
@@ -47,4 +45,3 @@ function initializeProfile() {
 }
 
 export { initializeProfile };
-
