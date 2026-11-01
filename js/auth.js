@@ -5,16 +5,26 @@ const signupForm = document.getElementById("signupForm");
 const authMessage = document.getElementById("authMessage");
 const authTitle = document.getElementById("authTitle");
 
+let previousFocus = null;
+
 function openAuth() {
   if (!authOverlay) return;
+
+  previousFocus = document.activeElement;
   authOverlay.hidden = false;
   showLogin();
+
   document.getElementById("loginEmail")?.focus();
 }
 
 function closeAuth() {
   if (!authOverlay) return;
+
   authOverlay.hidden = true;
+
+  if (previousFocus instanceof HTMLElement) {
+    previousFocus.focus();
+  }
 }
 
 function showLogin() {
@@ -24,7 +34,8 @@ function showLogin() {
   signupForm.hidden = true;
   authMessage.textContent = "";
   authMessage.dataset.error = "false";
-  authTitle.textContent = "Welcome Back";
+
+  if (authTitle) authTitle.textContent = "Welcome Back";
 }
 
 function showSignup() {
@@ -34,13 +45,14 @@ function showSignup() {
   signupForm.hidden = false;
   authMessage.textContent = "";
   authMessage.dataset.error = "false";
-  authTitle.textContent = "Create Your Account";
+
+  if (authTitle) authTitle.textContent = "Create Your Account";
 }
 
 function showAuthMessage(message, isError = false) {
   if (!authMessage) return;
 
-  authMessage.textContent = message;
+  authMessage.textContent = String(message);
   authMessage.dataset.error = String(isError);
 }
 
@@ -71,7 +83,10 @@ function friendlyError(error) {
 
 function updateProfileName(name) {
   const profileName = document.getElementById("profileName");
-  if (profileName) profileName.textContent = name || "Welcome to ECHOAGA";
+
+  if (profileName) {
+    profileName.textContent = name || "Welcome to ECHOAGA";
+  }
 }
 
 window.openAuth = openAuth;
@@ -89,4 +104,3 @@ document.addEventListener("keydown", event => {
     closeAuth();
   }
 });
-
