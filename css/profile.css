@@ -141,3 +141,49 @@
     gap: 16px;
   }
 }
+
+.profile-card > h2,
+.profile-card > p {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+.profile-card > h2 {
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.profile-card > p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.profile-card > button {
+  flex: 0 0 100%;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.profile-option {
+  display: flex;
+  align-items: center;
+  min-height: 54px;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+}
+
+.profile-card > button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
