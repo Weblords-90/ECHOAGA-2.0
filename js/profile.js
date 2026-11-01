@@ -4,42 +4,34 @@ function initializeProfile() {
   const profileAvatar = document.querySelector(".profile-avatar");
   const profileSignIn = document.querySelector("#profile .profile-hero-footer button");
   const userPill = document.getElementById("userPill");
-  const accountButton = document.getElementById("accountButton");
   const userLabel = document.getElementById("userLabel");
 
-  if (!profileName || !profileAvatar || !userPill || !accountButton || !userLabel) return;
+  if (!profileName || !profileAvatar || !profileSignIn || !userPill || !userLabel) return;
 
   function updateProfile() {
-    const loggedIn = userPill.style.display === "flex";
-    const name = loggedIn ? userLabel.textContent.trim() : "Welcome to ECHOAGA";
+    const loggedIn = getComputedStyle(userPill).display !== "none";
+    const name = loggedIn ? userLabel.textContent.trim() : "";
 
     profileName.textContent = name || "Welcome to ECHOAGA";
-    profileAvatar.textContent = loggedIn && name
+    profileAvatar.textContent = name
       ? name.charAt(0).toUpperCase()
       : "E";
 
-    if (profileSignIn) {
-      profileSignIn.hidden = loggedIn;
-      profileSignIn.style.display = loggedIn ? "none" : "flex";
-    }
+    profileSignIn.hidden = loggedIn;
+    profileSignIn.style.display = loggedIn ? "none" : "flex";
   }
 
   const observer = new MutationObserver(updateProfile);
 
   observer.observe(userPill, {
     attributes: true,
-    attributeFilter: ["style"]
+    attributeFilter: ["style", "class"]
   });
 
   observer.observe(userLabel, {
     childList: true,
     characterData: true,
     subtree: true
-  });
-
-  observer.observe(accountButton, {
-    attributes: true,
-    attributeFilter: ["style"]
   });
 
   updateProfile();
