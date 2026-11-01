@@ -1,11 +1,10 @@
 
-
 #app {
   width: 100%;
   max-width: 1400px;
   min-height: 100vh;
   margin: 0 auto;
-  padding-bottom: 110px;
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
 }
 
 .screen {
@@ -47,8 +46,8 @@
   width: 100%;
   min-height: 76px;
   padding: 12px 8px calc(12px + env(safe-area-inset-bottom));
-  background: var(--surface-glass);
   border-top: 1px solid var(--border);
+  background: var(--surface-glass);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -86,6 +85,9 @@
     transform: translateX(-50%);
   }
 }
-#app {
-  padding-bottom: calc(110px + env(safe-area-inset-bottom));
+
+@media (prefers-reduced-motion: reduce) {
+  .screen.active {
+    animation: none;
+  }
 }
