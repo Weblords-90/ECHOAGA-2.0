@@ -57,6 +57,33 @@ const libraryCategories = {
   }
 };
 
+const demoBooks = {
+  psychology: [
+    { title: "The Quiet Mind", author: "A. Rowan", color: "#244b3b", accent: "#d5b66c", symbol: "◉" },
+    { title: "Inside the Human Mind", author: "E. Morgan", color: "#24364b", accent: "#c6a76a", symbol: "✧" }
+  ],
+  "self-improvement": [
+    { title: "The Next Version", author: "J. Vale", color: "#31513d", accent: "#dfc27b", symbol: "✦" },
+    { title: "Small Wins", author: "M. Ellis", color: "#4b3827", accent: "#e0b96d", symbol: "↗" }
+  ],
+  manga: [
+    { title: "The Last Starblade", author: "K. Arashi", color: "#382b50", accent: "#d9b86d", symbol: "刀" },
+    { title: "Echoes of Kairo", author: "R. Sato", color: "#263e54", accent: "#d5b66c", symbol: "月" }
+  ],
+  novels: [
+    { title: "A Thousand Autumns", author: "L. Winters", color: "#5a343b", accent: "#e2bd79", symbol: "❧" },
+    { title: "The Glass Garden", author: "N. Hart", color: "#315247", accent: "#d7c18a", symbol: "❀" }
+  ],
+  mystery: [
+    { title: "The Silent Key", author: "C. Blackwood", color: "#292e3d", accent: "#d5b66c", symbol: "⌘" },
+    { title: "Midnight at Hollow Lane", author: "I. Graves", color: "#49313a", accent: "#d6b875", symbol: "☾" }
+  ],
+  "sci-fi": [
+    { title: "Beyond the Red Moon", author: "T. Orion", color: "#263d55", accent: "#e0bd70", symbol: "☄" },
+    { title: "The Memory Engine", author: "A. Nova", color: "#34304f", accent: "#d9b86d", symbol: "⌬" }
+  ]
+};
+
 export function initializeLibrary() {
   const library = document.getElementById("library");
   const section = library?.querySelector(".library-category-section");
@@ -96,7 +123,57 @@ export function initializeLibrary() {
     section.append(backButton, heading, container);
   }
 
-  function renderEmptyState(subcategory) {
+  function createBookCard(book) {
+    const card = document.createElement("article");
+    card.className = "echoaga-book-card";
+
+    const bookElement = document.createElement("div");
+    bookElement.className = "echoaga-book";
+    bookElement.style.setProperty("--book-color", book.color);
+    bookElement.style.setProperty("--book-accent", book.accent);
+
+    const spine = document.createElement("div");
+    spine.className = "echoaga-book-spine";
+    spine.textContent = "ECHOAGA";
+
+    const cover = document.createElement("div");
+    cover.className = "echoaga-book-cover";
+
+    const brand = document.createElement("span");
+    brand.className = "echoaga-book-brand";
+    brand.textContent = "ECHOAGA";
+
+    const symbol = document.createElement("span");
+    symbol.className = "echoaga-book-symbol";
+    symbol.textContent = book.symbol;
+
+    const title = document.createElement("strong");
+    title.className = "echoaga-book-title";
+    title.textContent = book.title;
+
+    const author = document.createElement("span");
+    author.className = "echoaga-book-author";
+    author.textContent = book.author;
+
+    cover.append(brand, symbol, title, author);
+    bookElement.append(spine, cover);
+
+    const caption = document.createElement("div");
+    caption.className = "echoaga-book-caption";
+
+    const captionTitle = document.createElement("h3");
+    captionTitle.textContent = book.title;
+
+    const captionAuthor = document.createElement("p");
+    captionAuthor.textContent = book.author;
+
+    caption.append(captionTitle, captionAuthor);
+    card.append(bookElement, caption);
+
+    return card;
+  }
+
+  function renderBooks(categoryKey, subcategory) {
     section.replaceChildren();
 
     const backButton = document.createElement("button");
@@ -108,11 +185,18 @@ export function initializeLibrary() {
     const heading = document.createElement("h2");
     heading.textContent = subcategory;
 
-    const emptyState = document.createElement("div");
-    emptyState.className = "library-empty";
-    emptyState.textContent = "Audiobooks in this category will appear here.";
+    const description = document.createElement("p");
+    description.className = "echoaga-demo-description";
+    description.textContent = "Explore the ECHOAGA demo collection.";
 
-    section.append(backButton, heading, emptyState);
+    const grid = document.createElement("div");
+    grid.className = "echoaga-book-grid";
+
+    (demoBooks[categoryKey] || []).forEach(book => {
+      grid.appendChild(createBookCard(book));
+    });
+
+    section.append(backButton, heading, description, grid);
   }
 
   section.addEventListener("click", event => {
@@ -137,7 +221,13 @@ export function initializeLibrary() {
     }
 
     if (subcategoryButton && section.contains(subcategoryButton)) {
-      renderEmptyState(subcategoryButton.dataset.subcategory);
+      const activeCategory = Object.entries(libraryCategories).find(
+        ([, category]) => category.subcategories.includes(subcategoryButton.dataset.subcategory)
+      );
+
+      if (!activeCategory) return;
+
+      renderBooks(activeCategory[0], subcategoryButton.dataset.subcategory);
     }
   });
 }
