@@ -160,3 +160,21 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   }
+
+.library-category-section {
+  margin: 28px 0;
+}
+
+.library-category-section > h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+}
+
+.library-category:focus-visible,
+.library-subcategory:focus-visible,
+.library-back:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
