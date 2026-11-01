@@ -2,7 +2,16 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -10,31 +19,89 @@
   }
 }
 
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes softGlow {
   0%, 100% {
-    box-shadow: 0 0 0 rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 rgba(207, 169, 79, 0);
   }
   50% {
-    box-shadow: 0 0 18px rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 25px rgba(207, 169, 79, .13);
+  }
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
 .screen.active {
-  animation: fadeIn 0.35s ease both;
+  animation: fadeIn .35s ease both;
 }
 
-#bottomNavigation button.active {
-  animation: softGlow 2.5s ease-in-out infinite;
+.screen.active h1 {
+  animation: fadeDown .45s ease both;
+}
+
+.home-hero {
+  animation: fadeUp .6s ease both;
+}
+
+.home-section,
+.discover-section,
+.library-section,
+.profile-section,
+.settings-section {
+  animation: fadeUp .55s ease both;
+}
+
+.home-card,
+.discover-card,
+.library-category {
+  animation: scaleIn .4s ease both;
+}
+
+.primary-button,
+.home-hero button {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.primary-button:active,
+.home-hero button:active {
+  transform: scale(.96);
 }
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
   }
 }
-
