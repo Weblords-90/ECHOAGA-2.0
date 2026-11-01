@@ -48,6 +48,8 @@ function initializeNotifications() {
       notification.addEventListener("animationend", () => {
         notification.remove();
       }, { once: true });
+
+      setTimeout(() => notification.remove(), 500);
     }
 
     close.addEventListener("click", removeNotification);
@@ -69,14 +71,14 @@ function initializeNotifications() {
   window.echoagaNotify = notify;
 
   document.addEventListener("echoaga:bookmarkschange", event => {
-    const bookmarks = event.detail?.bookmarks || [];
+    const action = event.detail?.action;
 
-    notify(
-      bookmarks.length ? "Audiobook saved to your library." : "Bookmark removed.",
-      "success"
-    );
+    if (action === "saved") {
+      notify("Audiobook saved to your library.", "success");
+    } else if (action === "removed") {
+      notify("Bookmark removed.", "success");
+    }
   });
 }
 
 export { initializeNotifications };
-      
