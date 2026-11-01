@@ -19,6 +19,7 @@ function applyTheme(theme) {
 
   state.theme = theme;
   document.body.dataset.theme = theme;
+  document.dispatchEvent(new Event("echoaga:themechange"));
   localStorage.setItem("echoaga-theme", theme);
 
   document.querySelectorAll("[data-theme-choice]").forEach(button => {
