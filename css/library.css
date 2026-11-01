@@ -178,3 +178,118 @@
   outline-offset: 3px;
 }
 
+
+.library-categories {
+  perspective: 1100px;
+}
+
+.library-category {
+  transform-style: preserve-3d;
+  isolation: isolate;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .045);
+  transition:
+    transform .4s cubic-bezier(.2,.8,.2,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.library-category::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    125deg,
+    rgba(255,255,255,.09),
+    transparent 38%,
+    rgba(207,169,79,.08)
+  );
+  opacity: .45;
+  pointer-events: none;
+}
+
+.library-category::after {
+  transition: transform .6s ease, box-shadow .6s ease;
+  pointer-events: none;
+}
+
+.library-category-icon {
+  transform: translateZ(18px);
+  box-shadow: 0 5px 12px rgba(0,0,0,.15);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+
+.library-category h3 {
+  transform: translateZ(15px);
+}
+
+.library-category p {
+  transform: translateZ(10px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .library-category:hover {
+    transform: perspective(900px) rotateX(4deg) rotateY(-4deg) translateY(-7px);
+    border-color: var(--gold);
+    box-shadow:
+      0 20px 35px rgba(0,0,0,.22),
+      0 0 22px rgba(207,169,79,.12);
+  }
+
+  .library-category:hover .library-category-icon {
+    transform: translateZ(28px) rotate(-5deg);
+    box-shadow: 0 9px 18px rgba(0,0,0,.25);
+  }
+
+  .library-category:hover::after {
+    transform: scale(1.25) translate(-5px,-5px);
+    box-shadow: 0 0 0 20px rgba(207,169,79,.04);
+  }
+}
+
+.library-subcategory {
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+@media (hover: hover) {
+  .library-subcategory:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px var(--shadow);
+  }
+}
+
+.library-category-section > h2 {
+  animation: textReveal .6s ease both;
+}
+
+.library-subcategories {
+  animation: cardReveal .45s ease both;
+}
+
+.library-empty {
+  animation: fadeUp .5s ease both;
+}
+
+.library-back {
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.library-back:active {
+  transform: scale(.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .library-category,
+  .library-category-icon,
+  .library-subcategory,
+  .library-back {
+    transform: none;
+    transition: none;
+  }
+}
