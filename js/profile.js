@@ -2,7 +2,7 @@
 function initializeProfile() {
   const profileName = document.getElementById("profileName");
   const profileAvatar = document.querySelector(".profile-avatar");
-  const profileSignIn = document.querySelector("#profile .profile-card button");
+  const profileSignIn = document.querySelector("#profile .profile-hero-footer button");
   const userPill = document.getElementById("userPill");
   const accountButton = document.getElementById("accountButton");
   const userLabel = document.getElementById("userLabel");
@@ -20,6 +20,7 @@ function initializeProfile() {
 
     if (profileSignIn) {
       profileSignIn.hidden = loggedIn;
+      profileSignIn.style.display = loggedIn ? "none" : "flex";
     }
   }
 
