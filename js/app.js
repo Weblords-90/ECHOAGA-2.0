@@ -5,6 +5,7 @@ import { initializeDiscover } from "./discover.js";
 import { initializePlayer } from "./player.js";
 import { initializeProfile } from "./profile.js";
 import { initializeSettings } from "./settings.js";
+import { initializeNotifications } from "./notifications.js";
 import { initializeBookmarks } from "./bookmarks.js";
 const app = document.getElementById("app");
 
