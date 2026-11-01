@@ -5,6 +5,7 @@ import { initializeDiscover } from "./discover.js";
 import { initializePlayer } from "./player.js";
 import { initializeProfile } from "./profile.js";
 import { initializeSettings } from "./settings.js";
+import { initializeBookmarks } from "./bookmarks.js";
 const app = document.getElementById("app");
 
 const state = {
@@ -61,6 +62,7 @@ function initializeApp() {
   initializePlayer();
   initializeProfile();
   initializeSettings();
+  initializeBookmarks();
   navigateTo(state.currentScreen);
   
 
