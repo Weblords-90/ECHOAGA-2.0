@@ -33,7 +33,7 @@
     <section id="home" data-screen="home" class="screen active">
       <header class="home-header">
         <div class="home-brand">ECHOAGA</div>
-        <button type="button" id="accountButton" onclick="openAuth()">Sign In</button>
+        <button type="button" id="accountButton" onclick="openAuth()">Log In</button>
         <div id="userPill" style="display:none">
           <span id="userLabel"></span>
           <button type="button" id="logoutButton" onclick="logoutUser()">Log Out</button>
@@ -174,7 +174,7 @@
           </div>
 
           <button type="button" onclick="openAuth()">
-            Sign In / Create Account
+            Log In / Create Account
             <span>↗</span>
           </button>
         </div>
@@ -194,34 +194,28 @@
 
           <div class="profile-menu-item">
             <div class="profile-menu-icon">◈</div>
-
             <div class="profile-menu-info">
               <strong>Account Information</strong>
               <span>Manage your personal details</span>
             </div>
-
             <span class="profile-menu-arrow">›</span>
           </div>
 
           <div class="profile-menu-item">
             <div class="profile-menu-icon">◷</div>
-
             <div class="profile-menu-info">
               <strong>Listening History</strong>
               <span>Return to your previous journeys</span>
             </div>
-
             <span class="profile-menu-arrow">›</span>
           </div>
 
           <div class="profile-menu-item">
             <div class="profile-menu-icon">◇</div>
-
             <div class="profile-menu-info">
               <strong>Your Bookmarks</strong>
               <span>Your saved stories and favourites</span>
             </div>
-
             <span class="profile-menu-arrow">›</span>
           </div>
 
@@ -314,11 +308,11 @@
     <div id="authPanel" role="dialog" aria-modal="true" aria-labelledby="authTitle">
       <button type="button" onclick="closeAuth()" aria-label="Close">×</button>
 
-      <h2 id="authTitle">Welcome to ECHOAGA</h2>
+      <h2 id="authTitle">Welcome Back</h2>
       <p id="authMessage" role="status" aria-live="polite"></p>
 
-      <div>
-        <button type="button" onclick="showLogin()">Sign In</button>
+      <div class="auth-switch">
+        <button type="button" onclick="showLogin()">Log In</button>
         <button type="button" onclick="showSignup()">Create Account</button>
       </div>
 
@@ -329,7 +323,7 @@
         <label for="loginPassword">Password</label>
         <input id="loginPassword" type="password" autocomplete="current-password" required>
 
-        <button type="submit" id="loginSubmit">SIGN IN TO ECHOAGA</button>
+        <button type="submit" id="loginSubmit">LOG IN</button>
         <button type="button" onclick="resetPassword()">Forgot your password?</button>
       </form>
 
