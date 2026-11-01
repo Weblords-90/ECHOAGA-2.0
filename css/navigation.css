@@ -1,33 +1,66 @@
 
 #bottomNavigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 4px;
-  padding: 12px 6px calc(12px + env(safe-area-inset-bottom));
-  background: var(--bg-soft, #0d1511);
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  gap: 5px;
+  border-top: 1px solid var(--border);
 }
 
 #bottomNavigation button {
-  flex: 1;
-  border: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 48px;
+  padding: 9px 3px;
+  border: 1px solid transparent;
+  border-radius: 13px;
   background: transparent;
-  color: #89948d;
-  padding: 10px 2px;
+  color: var(--muted);
   font-size: 11px;
   font-weight: 600;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: color 0.25s ease, background 0.25s ease;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+#bottomNavigation button::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 10px;
+  background: var(--gold);
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
 }
 
 #bottomNavigation button.active {
-  color: #d4af37;
-  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--border);
+  background: var(--surface-raised);
+  color: var(--gold);
+}
+
+#bottomNavigation button.active::before {
+  width: 28px;
 }
 
 #bottomNavigation button:active {
-  transform: scale(0.96);
+  transform: scale(0.94);
 }
 
+#bottomNavigation button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  #bottomNavigation {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  #bottomNavigation button {
+    font-size: 12px;
+  }
+}
