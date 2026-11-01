@@ -1,6 +1,7 @@
 
 import { initializeNavigation } from "./navigation.js";
 import { initializeLibrary } from "./library.js";
+
 const app = document.getElementById("app");
 
 const state = {
@@ -18,10 +19,9 @@ function applyTheme(theme) {
   localStorage.setItem("echoaga-theme", theme);
 
   document.querySelectorAll("[data-theme-choice]").forEach(button => {
-    button.classList.toggle(
-      "selected",
-      button.dataset.themeChoice === theme
-    );
+    const selected = button.dataset.themeChoice === theme;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
   });
 }
 
@@ -33,12 +33,18 @@ function navigateTo(screen) {
   state.currentScreen = screen;
 
   document.querySelectorAll("[data-screen].screen").forEach(element => {
-    element.classList.toggle("active", element.dataset.screen === screen);
+    const active = element.dataset.screen === screen;
+    element.classList.toggle("active", active);
+    element.setAttribute("aria-hidden", String(!active));
   });
 
   document.querySelectorAll("#bottomNavigation [data-screen]").forEach(element => {
-    element.classList.toggle("active", element.dataset.screen === screen);
+    const active = element.dataset.screen === screen;
+    element.classList.toggle("active", active);
+    element.setAttribute("aria-current", active ? "page" : "false");
   });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function initializeApp() {
@@ -52,12 +58,22 @@ function initializeApp() {
   document.addEventListener("click", event => {
     const themeButton = event.target.closest("[data-theme-choice]");
 
-    if (!themeButton) return;
-
-    applyTheme(themeButton.dataset.themeChoice);
+    if (themeButton) {
+      applyTheme(themeButton.dataset.themeChoice);
+    }
   });
+
+  window.echoaga = {
+    navigateTo,
+    applyTheme,
+    state
+  };
 
   console.log("ECHOAGA 2.0 initialized.");
 }
 
-document.addEventListener("DOMContentLoaded", initializeApp);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeApp, { once: true });
+} else {
+  initializeApp();
+}
