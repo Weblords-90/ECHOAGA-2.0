@@ -65,43 +65,79 @@ export function initializeLibrary() {
 
   const originalContent = section.innerHTML;
 
+  function renderCategories() {
+    section.innerHTML = originalContent;
+  }
+
+  function renderSubcategories(category) {
+    section.replaceChildren();
+
+    const backButton = document.createElement("button");
+    backButton.type = "button";
+    backButton.className = "library-back";
+    backButton.dataset.libraryBack = "";
+    backButton.textContent = "← Back to Library";
+
+    const heading = document.createElement("h2");
+    heading.textContent = category.title;
+
+    const container = document.createElement("div");
+    container.className = "library-subcategories";
+
+    category.subcategories.forEach(item => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "library-subcategory";
+      button.dataset.subcategory = item;
+      button.textContent = item;
+      container.appendChild(button);
+    });
+
+    section.append(backButton, heading, container);
+  }
+
+  function renderEmptyState(subcategory) {
+    section.replaceChildren();
+
+    const backButton = document.createElement("button");
+    backButton.type = "button";
+    backButton.className = "library-back";
+    backButton.dataset.libraryBack = "";
+    backButton.textContent = "← Back to Categories";
+
+    const heading = document.createElement("h2");
+    heading.textContent = subcategory;
+
+    const emptyState = document.createElement("div");
+    emptyState.className = "library-empty";
+    emptyState.textContent = "Audiobooks in this category will appear here.";
+
+    section.append(backButton, heading, emptyState);
+  }
+
   section.addEventListener("click", event => {
+    if (!(event.target instanceof Element)) return;
+
     const backButton = event.target.closest("[data-library-back]");
     const categoryButton = event.target.closest("[data-category]");
     const subcategoryButton = event.target.closest("[data-subcategory]");
 
-    if (backButton) {
-      section.innerHTML = originalContent;
+    if (backButton && section.contains(backButton)) {
+      renderCategories();
       return;
     }
 
-    if (categoryButton) {
+    if (categoryButton && section.contains(categoryButton)) {
       const category = libraryCategories[categoryButton.dataset.category];
 
       if (!category) return;
 
-      section.innerHTML = `
-        <button type="button" data-library-back class="library-back">← Back to Library</button>
-        <h2>${category.title}</h2>
-        <div class="library-subcategories">
-          ${category.subcategories.map(item => `
-            <button type="button" class="library-subcategory" data-subcategory="${item}">
-              ${item}
-            </button>
-          `).join("")}
-        </div>
-      `;
+      renderSubcategories(category);
       return;
     }
 
-    if (subcategoryButton) {
-      section.innerHTML = `
-        <button type="button" data-library-back class="library-back">← Back to Categories</button>
-        <h2>${subcategoryButton.dataset.subcategory}</h2>
-        <div class="library-empty">
-          Audiobooks in this category will appear here.
-        </div>
-      `;
+    if (subcategoryButton && section.contains(subcategoryButton)) {
+      renderEmptyState(subcategoryButton.dataset.subcategory);
     }
   });
 }
