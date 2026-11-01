@@ -11,7 +11,12 @@ function getBookmarks() {
 }
 
 function saveBookmarks(bookmarks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function initializeBookmarks() {
@@ -29,6 +34,8 @@ function initializeBookmarks() {
   }
 
   document.addEventListener("click", event => {
+    if (!(event.target instanceof Element)) return;
+
     const button = event.target.closest("[data-bookmark-id]");
 
     if (!button) return;
@@ -43,11 +50,16 @@ function initializeBookmarks() {
       ? bookmarks.filter(item => item !== id)
       : [...bookmarks, id];
 
-    saveBookmarks(updated);
+    if (!saveBookmarks(updated)) return;
+
     updateButtons();
 
     document.dispatchEvent(new CustomEvent("echoaga:bookmarkschange", {
-      detail: { bookmarks: updated }
+      detail: {
+        bookmarks: updated,
+        action: saved ? "removed" : "saved",
+        id
+      }
     }));
   });
 
@@ -61,4 +73,3 @@ function initializeBookmarks() {
 }
 
 export { initializeBookmarks };
-
