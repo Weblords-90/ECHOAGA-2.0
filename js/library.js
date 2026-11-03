@@ -1,4 +1,10 @@
 
+import {
+  echoagaBooks,
+  categoryNames,
+  createEchoagaBook
+} from "./books.js";
+
 const libraryCategories = {
   psychology: {
     title: "Psychology",
@@ -57,53 +63,58 @@ const libraryCategories = {
   }
 };
 
-const demoBooks = {
-  psychology: [
-    { id: "quiet-mind", title: "The Quiet Mind", author: "A. Rowan", color: "#244b3b", accent: "#d5b66c", symbol: "◉" },
-    { id: "human-mind", title: "Inside the Human Mind", author: "E. Morgan", color: "#24364b", accent: "#c6a76a", symbol: "✧" }
-  ],
-  "self-improvement": [
-    { id: "next-version", title: "The Next Version", author: "J. Vale", color: "#31513d", accent: "#dfc27b", symbol: "✦" },
-    { id: "small-wins", title: "Small Wins", author: "M. Ellis", color: "#4b3827", accent: "#e0b96d", symbol: "↗" }
-  ],
-  manga: [
-    { id: "starblade", title: "The Last Starblade", author: "K. Arashi", color: "#382b50", accent: "#d9b86d", symbol: "刀" },
-    { id: "echoes-kairo", title: "Echoes of Kairo", author: "R. Sato", color: "#263e54", accent: "#d5b66c", symbol: "月" }
-  ],
-  novels: [
-    { id: "thousand-autumns", title: "A Thousand Autumns", author: "L. Winters", color: "#5a343b", accent: "#e2bd79", symbol: "❧" },
-    { id: "glass-garden", title: "The Glass Garden", author: "N. Hart", color: "#315247", accent: "#d7c18a", symbol: "❀" }
-  ],
-  mystery: [
-    { id: "silent-key", title: "The Silent Key", author: "C. Blackwood", color: "#292e3d", accent: "#d5b66c", symbol: "⌘" },
-    { id: "hollow-lane", title: "Midnight at Hollow Lane", author: "I. Graves", color: "#49313a", accent: "#d6b875", symbol: "☾" }
-  ],
-  "sci-fi": [
-    { id: "red-moon", title: "Beyond the Red Moon", author: "T. Orion", color: "#263d55", accent: "#e0bd70", symbol: "☄" },
-    { id: "memory-engine", title: "The Memory Engine", author: "A. Nova", color: "#34304f", accent: "#d9b86d", symbol: "⌬" }
-  ]
-};
-
 export function initializeLibrary() {
   const library = document.getElementById("library");
   const section = library?.querySelector(".library-category-section");
+  const searchInput = library?.querySelector(".library-search input, input.library-search");
 
   if (!library || !section) return;
 
   const originalContent = section.innerHTML;
 
+  let activeCategory = null;
+  let activeSubcategory = null;
+  let searchQuery = "";
+
+  let searchStatus = library.querySelector("#librarySearchStatus");
+
+  if (!searchStatus && searchInput) {
+    searchStatus = document.createElement("div");
+    searchStatus.id = "librarySearchStatus";
+    searchStatus.className = "library-search-status";
+    searchStatus.setAttribute("role", "status");
+    searchStatus.setAttribute("aria-live", "polite");
+    searchStatus.hidden = true;
+    searchInput.insertAdjacentElement("afterend", searchStatus);
+  }
+
+  function updateSearchStatus(message) {
+    if (!searchStatus) return;
+
+    searchStatus.textContent = message;
+    searchStatus.hidden = !message;
+  }
+
   function renderCategories() {
     section.innerHTML = originalContent;
+  }
+
+  function createBackButton(destination, label) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "library-back";
+    button.dataset.libraryBack = destination;
+    button.textContent = label;
+    return button;
   }
 
   function renderSubcategories(category) {
     section.replaceChildren();
 
-    const backButton = document.createElement("button");
-    backButton.type = "button";
-    backButton.className = "library-back";
-    backButton.dataset.libraryBack = "categories";
-    backButton.textContent = "← Back to Library";
+    const backButton = createBackButton(
+      "categories",
+      "← Back to Library"
+    );
 
     const heading = document.createElement("h2");
     heading.textContent = category.title;
@@ -123,87 +134,89 @@ export function initializeLibrary() {
     section.append(backButton, heading, container);
   }
 
-  function createBookCard(book) {
-    const card = document.createElement("article");
-    card.className = "echoaga-book-card";
-    card.tabIndex = 0;
-    card.setAttribute("role", "button");
-    card.setAttribute("aria-label", `View ${book.title}`);
-    card.dataset.echoagaBook = book.id;
-
-    const bookElement = document.createElement("div");
-    bookElement.className = "echoaga-book";
-    bookElement.style.setProperty("--book-color", book.color);
-    bookElement.style.setProperty("--book-accent", book.accent);
-
-    const spine = document.createElement("div");
-    spine.className = "echoaga-book-spine";
-    spine.textContent = "ECHOAGA";
-
-    const cover = document.createElement("div");
-    cover.className = "echoaga-book-cover";
-
-    const brand = document.createElement("span");
-    brand.className = "echoaga-book-brand";
-    brand.textContent = "ECHOAGA";
-
-    const symbol = document.createElement("span");
-    symbol.className = "echoaga-book-symbol";
-    symbol.textContent = book.symbol;
-
-    const title = document.createElement("strong");
-    title.className = "echoaga-book-title";
-    title.textContent = book.title;
-
-    const author = document.createElement("span");
-    author.className = "echoaga-book-author";
-    author.textContent = book.author;
-
-    cover.append(brand, symbol, title, author);
-    bookElement.append(spine, cover);
-
-    const caption = document.createElement("div");
-    caption.className = "echoaga-book-caption";
-
-    const captionTitle = document.createElement("h3");
-    captionTitle.textContent = book.title;
-
-    const captionAuthor = document.createElement("p");
-    captionAuthor.textContent = book.author;
-
-    caption.append(captionTitle, captionAuthor);
-    card.append(bookElement, caption);
-
-    return card;
-  }
-
-  function renderBooks(categoryKey, subcategory) {
+  function renderBookResults(books, headingText, backDestination, backLabel) {
     section.replaceChildren();
 
-    const backButton = document.createElement("button");
-    backButton.type = "button";
-    backButton.className = "library-back";
-    backButton.dataset.libraryBack = "subcategories";
-    backButton.textContent = "← Back to Categories";
+    const backButton = createBackButton(
+      backDestination,
+      backLabel
+    );
 
     const heading = document.createElement("h2");
-    heading.textContent = subcategory;
+    heading.textContent = headingText;
 
     const description = document.createElement("p");
     description.className = "echoaga-demo-description";
-    description.textContent = "Explore the ECHOAGA demo collection.";
+    description.textContent = books.length
+      ? "Explore the ECHOAGA demo collection."
+      : "No books are available in this section yet.";
 
     const grid = document.createElement("div");
     grid.className = "echoaga-book-grid";
 
-    (demoBooks[categoryKey] || []).forEach(book => {
-      grid.appendChild(createBookCard(book));
+    books.forEach(book => {
+      grid.appendChild(createEchoagaBook(book));
     });
 
     section.append(backButton, heading, description, grid);
   }
 
-  let activeCategory = null;
+  function renderBooks(categoryKey, subcategory) {
+    const matchingBooks = echoagaBooks.filter(book =>
+      book.category === categoryKey &&
+      book.subcategory === subcategory
+    );
+
+    activeCategory = categoryKey;
+    activeSubcategory = subcategory;
+
+    renderBookResults(
+      matchingBooks,
+      subcategory,
+      "subcategories",
+      "← Back to Categories"
+    );
+  }
+
+  function renderSearchResults(query) {
+    const matchingBooks = echoagaBooks.filter(book =>
+      ([
+        book.title,
+        book.author,
+        book.category,
+        categoryNames[book.category],
+        book.subcategory,
+        book.description
+      ].join(" ").toLowerCase()).includes(query)
+    );
+
+    renderBookResults(
+      matchingBooks,
+      "Search Results",
+      "search",
+      "← Back"
+    );
+
+    updateSearchStatus(
+      matchingBooks.length
+        ? `${matchingBooks.length} result${matchingBooks.length === 1 ? "" : "s"} found.`
+        : "No books found. Try another search."
+    );
+  }
+
+  function restoreCurrentView() {
+    if (activeCategory && activeSubcategory) {
+      renderBooks(activeCategory, activeSubcategory);
+      return;
+    }
+
+    if (activeCategory) {
+      renderSubcategories(libraryCategories[activeCategory]);
+      return;
+    }
+
+    renderCategories();
+  }
 
   section.addEventListener("click", event => {
     if (!(event.target instanceof Element)) return;
@@ -213,12 +226,22 @@ export function initializeLibrary() {
     const subcategoryButton = event.target.closest("[data-subcategory]");
 
     if (backButton && section.contains(backButton)) {
-      if (backButton.dataset.libraryBack === "subcategories" && activeCategory) {
-        renderSubcategories(libraryCategories[activeCategory]);
-      } else {
-        activeCategory = null;
-        renderCategories();
+      const destination = backButton.dataset.libraryBack;
+
+      if (destination === "search") {
+        restoreCurrentView();
+        return;
       }
+
+      if (destination === "subcategories" && activeCategory) {
+        activeSubcategory = null;
+        renderSubcategories(libraryCategories[activeCategory]);
+        return;
+      }
+
+      activeCategory = null;
+      activeSubcategory = null;
+      renderCategories();
       return;
     }
 
@@ -229,6 +252,7 @@ export function initializeLibrary() {
       if (!category) return;
 
       activeCategory = key;
+      activeSubcategory = null;
       renderSubcategories(category);
       return;
     }
@@ -236,7 +260,25 @@ export function initializeLibrary() {
     if (subcategoryButton && section.contains(subcategoryButton)) {
       if (!activeCategory) return;
 
-      renderBooks(activeCategory, subcategoryButton.dataset.subcategory);
+      const selectedSubcategory = subcategoryButton.dataset.subcategory;
+      const category = libraryCategories[activeCategory];
+
+      if (!category?.subcategories.includes(selectedSubcategory)) return;
+
+      renderBooks(activeCategory, selectedSubcategory);
     }
   });
-}
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      searchQuery = searchInput.value.trim().toLowerCase();
+
+      if (searchQuery) {
+        renderSearchResults(searchQuery);
+      } else {
+        updateSearchStatus("");
+        restoreCurrentView();
+      }
+    });
+  }
+                  }
