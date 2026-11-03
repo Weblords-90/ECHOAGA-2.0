@@ -3,355 +3,223 @@ const echoagaBooks = [
   {
     id: "quiet-mind",
     title: "The Quiet Mind",
-    author: "A. Rowan",
+    author: "Aarav Mehta",
     category: "psychology",
-    color: "#244b3b",
-    accent: "#d5b66c",
-    symbol: "◉",
-    description: "Explore the hidden patterns of thought, emotion and the human mind.",
-    progress: 68
+    subcategory: "Mental Well-being",
+    type: "audiobook",
+    description: "A journey into understanding your thoughts and finding inner peace.",
+    cover: "assets/covers/quiet-mind.jpg",
+    rating: 4.8,
+    duration: "5h 20m",
+    chapters: 12,
+    featured: true
   },
   {
     id: "human-mind",
     title: "Inside the Human Mind",
-    author: "E. Morgan",
+    author: "Dr. Rohan Kapoor",
     category: "psychology",
-    color: "#24364b",
-    accent: "#c6a76a",
-    symbol: "✧",
-    description: "A fictional journey through memory, behaviour and perception.",
-    progress: 0
+    subcategory: "Human Mind",
+    type: "audiobook",
+    description: "Explore the mysteries of human behaviour, emotions and thinking.",
+    cover: "assets/covers/human-mind.jpg",
+    rating: 4.7,
+    duration: "6h 10m",
+    chapters: 14,
+    featured: false
   },
   {
     id: "next-version",
-    title: "The Next Version",
-    author: "J. Vale",
+    title: "Your Next Version",
+    author: "Kabir Malhotra",
     category: "self-improvement",
-    color: "#31513d",
-    accent: "#dfc27b",
-    symbol: "✦",
-    description: "Small decisions, powerful habits and the journey of personal growth.",
-    progress: 32
+    subcategory: "Habits and Discipline",
+    type: "audiobook",
+    description: "Build better habits and become the best version of yourself.",
+    cover: "assets/covers/next-version.jpg",
+    rating: 4.9,
+    duration: "4h 45m",
+    chapters: 10,
+    featured: true
   },
   {
     id: "small-wins",
-    title: "Small Wins",
-    author: "M. Ellis",
+    title: "The Power of Small Wins",
+    author: "Ishita Sharma",
     category: "self-improvement",
-    color: "#4b3827",
-    accent: "#e0b96d",
-    symbol: "↗",
-    description: "A fictional guide to building momentum through everyday actions.",
-    progress: 0
+    subcategory: "Motivation and Inspiration",
+    type: "audiobook",
+    description: "Discover how small actions can create extraordinary results.",
+    cover: "assets/covers/small-wins.jpg",
+    rating: 4.6,
+    duration: "3h 50m",
+    chapters: 9,
+    featured: false
   },
   {
     id: "starblade",
-    title: "The Last Starblade",
-    author: "K. Arashi",
+    title: "Starblade Chronicles",
+    author: "Ren Takahashi",
     category: "manga",
-    color: "#382b50",
-    accent: "#d9b86d",
-    symbol: "刀",
-    description: "A mysterious warrior discovers a power hidden beyond the stars.",
-    progress: 0
+    subcategory: "Action",
+    type: "manga",
+    description: "A young warrior discovers a mysterious power hidden within an ancient blade.",
+    cover: "assets/covers/starblade.jpg",
+    rating: 4.9,
+    chapters: 24,
+    featured: true
   },
   {
     id: "echoes-kairo",
     title: "Echoes of Kairo",
-    author: "R. Sato",
+    author: "Mika Sato",
     category: "manga",
-    color: "#263e54",
-    accent: "#d5b66c",
-    symbol: "月",
-    description: "An original fantasy adventure through a forgotten city.",
-    progress: 0
+    subcategory: "Adventure",
+    type: "manga",
+    description: "An unforgettable adventure through a world full of secrets.",
+    cover: "assets/covers/echoes-kairo.jpg",
+    rating: 4.8,
+    chapters: 18,
+    featured: false
   },
   {
     id: "thousand-autumns",
     title: "A Thousand Autumns",
-    author: "L. Winters",
+    author: "Anaya Verma",
     category: "novels",
-    color: "#5a343b",
-    accent: "#e2bd79",
-    symbol: "❧",
-    description: "A fictional story of memory, distance and unexpected connections.",
-    progress: 0
+    subcategory: "Romance and Relationships",
+    type: "audiobook",
+    description: "A heartfelt story about love, distance and second chances.",
+    cover: "assets/covers/thousand-autumns.jpg",
+    rating: 4.7,
+    duration: "7h 15m",
+    chapters: 16,
+    featured: true
   },
   {
     id: "glass-garden",
     title: "The Glass Garden",
-    author: "N. Hart",
+    author: "Meera Khanna",
     category: "novels",
-    color: "#315247",
-    accent: "#d7c18a",
-    symbol: "❀",
-    description: "A mysterious garden holds the secrets of a forgotten family.",
-    progress: 0
+    subcategory: "Fiction",
+    type: "audiobook",
+    description: "A mysterious garden changes the lives of everyone who enters it.",
+    cover: "assets/covers/glass-garden.jpg",
+    rating: 4.6,
+    duration: "6h 30m",
+    chapters: 15,
+    featured: false
   },
   {
     id: "silent-key",
     title: "The Silent Key",
-    author: "C. Blackwood",
+    author: "Arjun Sethi",
     category: "mystery",
-    color: "#292e3d",
-    accent: "#d5b66c",
-    symbol: "⌘",
-    description: "One key, a locked room and a secret nobody wants uncovered.",
-    progress: 84
+    subcategory: "Puzzle Mystery",
+    type: "audiobook",
+    description: "A strange key leads to a puzzle that nobody has ever solved.",
+    cover: "assets/covers/silent-key.jpg",
+    rating: 4.8,
+    duration: "5h 40m",
+    chapters: 13,
+    featured: true
   },
   {
     id: "hollow-lane",
-    title: "Midnight at Hollow Lane",
-    author: "I. Graves",
+    title: "Secrets of Hollow Lane",
+    author: "Naina Roy",
     category: "mystery",
-    color: "#49313a",
-    accent: "#d6b875",
-    symbol: "☾",
-    description: "A strange disappearance leads to a trail of impossible clues.",
-    progress: 0
+    subcategory: "Detective Mystery",
+    type: "audiobook",
+    description: "A detective investigates a disappearance in a quiet town.",
+    cover: "assets/covers/hollow-lane.jpg",
+    rating: 4.7,
+    duration: "6h 05m",
+    chapters: 14,
+    featured: false
   },
   {
     id: "red-moon",
     title: "Beyond the Red Moon",
-    author: "T. Orion",
+    author: "Devansh Rao",
     category: "sci-fi",
-    color: "#263d55",
-    accent: "#e0bd70",
-    symbol: "☄",
-    description: "An original science-fiction adventure beyond the edge of known space.",
-    progress: 0
+    subcategory: "Space and Aliens",
+    type: "audiobook",
+    description: "A space expedition discovers something beyond human imagination.",
+    cover: "assets/covers/red-moon.jpg",
+    rating: 4.9,
+    duration: "7h 00m",
+    chapters: 17,
+    featured: true
   },
   {
     id: "memory-engine",
     title: "The Memory Engine",
-    author: "A. Nova",
+    author: "Sana Iyer",
     category: "sci-fi",
-    color: "#34304f",
-    accent: "#d9b86d",
-    symbol: "⌬",
-    description: "A machine capable of storing memories begins to rewrite reality.",
-    progress: 0
+    subcategory: "AI and Robotics",
+    type: "audiobook",
+    description: "An advanced machine begins remembering things that never happened.",
+    cover: "assets/covers/memory-engine.jpg",
+    rating: 4.8,
+    duration: "5h 55m",
+    chapters: 12,
+    featured: false
   }
 ];
 
 const categoryNames = {
   psychology: "Psychology",
-  "self-improvement": "Self-Improvement",
+  "self-improvement": "Self Improvement",
   manga: "Manga",
   novels: "Novels",
   mystery: "Mystery",
-  "sci-fi": "Sci-Fi"
+  "sci-fi": "Science Fiction"
 };
 
 function createEchoagaBook(book) {
-  const card = document.createElement("article");
-  card.className = "echoaga-book-card";
-  card.tabIndex = 0;
-  card.setAttribute("role", "button");
-  card.setAttribute("aria-label", `View ${book.title}`);
-  card.dataset.echoagaBook = book.id;
+  const card = document.createElement("div");
+
+  card.className = "book-card";
+  card.dataset.bookId = book.id;
+  card.dataset.category = book.category;
+  card.dataset.subcategory = book.subcategory;
+  card.dataset.type = book.type;
+
   card.dataset.search = [
     book.title,
     book.author,
     book.category,
-    categoryNames[book.category],
+    book.subcategory,
+    book.type,
     book.description
   ].join(" ").toLowerCase();
 
-  const bookElement = document.createElement("div");
-  bookElement.className = "echoaga-book";
-  bookElement.style.setProperty("--book-color", book.color);
-  bookElement.style.setProperty("--book-accent", book.accent);
-
-  const spine = document.createElement("div");
-  spine.className = "echoaga-book-spine";
-  spine.textContent = "ECHOAGA";
-
-  const cover = document.createElement("div");
-  cover.className = "echoaga-book-cover";
-
-  const brand = document.createElement("span");
-  brand.className = "echoaga-book-brand";
-  brand.textContent = "ECHOAGA";
-
-  const symbol = document.createElement("span");
-  symbol.className = "echoaga-book-symbol";
-  symbol.textContent = book.symbol;
-
-  const title = document.createElement("strong");
-  title.className = "echoaga-book-title";
-  title.textContent = book.title;
-
-  const author = document.createElement("span");
-  author.className = "echoaga-book-author";
-  author.textContent = book.author;
-
-  cover.append(brand, symbol, title, author);
-  bookElement.append(spine, cover);
-
-  const caption = document.createElement("div");
-  caption.className = "echoaga-book-caption";
-
-  const captionTitle = document.createElement("h3");
-  captionTitle.textContent = book.title;
-
-  const captionAuthor = document.createElement("p");
-  captionAuthor.textContent = book.author;
-
-  caption.append(captionTitle, captionAuthor);
-  card.append(bookElement, caption);
+  card.innerHTML = `
+    <div class="book-cover">
+      <img src="${book.cover}" alt="${book.title}" loading="lazy">
+    </div>
+    <div class="book-info">
+      <h3>${book.title}</h3>
+      <p>${book.author}</p>
+      <span class="book-rating">★ ${book.rating}</span>
+    </div>
+  `;
 
   return card;
 }
 
-function renderBookGrid(container, books) {
+function initializeEchoagaBooks() {
+  const container = document.getElementById("echoagaLibraryBooks");
+
   if (!container) return;
 
-  container.replaceChildren();
+  container.innerHTML = "";
 
-  books.forEach(book => {
+  echoagaBooks.forEach(book => {
     container.appendChild(createEchoagaBook(book));
   });
 }
-
-function renderDiscoverBooks() {
-  const discover = document.getElementById("discover");
-  const firstSection = discover?.querySelector(".discover-section");
-
-  if (!firstSection || document.getElementById("echoagaDiscoverBooks")) return;
-
-  firstSection.querySelector(".discover-placeholder")?.remove();
-
-  const grid = document.createElement("div");
-  grid.id = "echoagaDiscoverBooks";
-  grid.className = "echoaga-book-grid";
-
-  echoagaBooks.forEach(book => {
-    grid.appendChild(createEchoagaBook(book));
-  });
-
-  firstSection.appendChild(grid);
-}
-
-function showBookDetails(book) {
-  let dialog = document.getElementById("echoagaBookDialog");
-
-  if (!dialog) {
-    dialog = document.createElement("dialog");
-    dialog.id = "echoagaBookDialog";
-    dialog.className = "echoaga-book-dialog";
-    document.body.appendChild(dialog);
-  }
-
-  dialog.replaceChildren();
-
-  const close = document.createElement("button");
-  close.type = "button";
-  close.className = "echoaga-dialog-close";
-  close.textContent = "×";
-  close.setAttribute("aria-label", "Close book details");
-  close.addEventListener("click", () => dialog.close());
-
-  const heading = document.createElement("span");
-  heading.className = "echoaga-dialog-brand";
-  heading.textContent = "ECHOAGA COLLECTION";
-
-  const title = document.createElement("h2");
-  title.textContent = book.title;
-
-  const author = document.createElement("p");
-  author.className = "echoaga-dialog-author";
-  author.textContent = `Created by ${book.author}`;
-
-  const category = document.createElement("span");
-  category.className = "echoaga-dialog-category";
-  category.textContent = categoryNames[book.category];
-
-  const description = document.createElement("p");
-  description.className = "echoaga-dialog-description";
-  description.textContent = book.description;
-
-  const note = document.createElement("p");
-  note.className = "echoaga-dialog-note";
-  note.textContent = book.category === "manga"
-    ? "Demo manga • Page-by-page reading is coming soon."
-    : "Demo audiobook • Audio playback is not available yet.";
-
-  dialog.append(close, heading, title, author, category, description, note);
-
-  if (!dialog.open) {
-    dialog.showModal();
-  }
-}
-
-function initializeEchoagaBooks() {
-  const homeBooks = echoagaBooks.slice(0, 8);
-  const continueBooks = echoagaBooks.filter(book => book.progress > 0);
-
-  renderBookGrid(
-    document.getElementById("homeBookGrid"),
-    homeBooks
-  );
-
-  renderBookGrid(
-    document.getElementById("continueBookGrid"),
-    continueBooks
-  );
-
-  renderDiscoverBooks();
-
-  const librarySection = document.querySelector("#library .library-category-section");
-
-  if (librarySection && !document.getElementById("echoagaLibraryBooks")) {
-    const catalog = document.createElement("section");
-    catalog.id = "echoagaLibraryBooks";
-    catalog.className = "echoaga-library-catalog";
-
-    Object.entries(categoryNames).forEach(([key, name]) => {
-      const group = document.createElement("section");
-      group.className = "echoaga-library-group";
-      group.dataset.echoagaCategory = key;
-
-      const heading = document.createElement("h2");
-      heading.textContent = name;
-
-      const grid = document.createElement("div");
-      grid.className = "echoaga-book-grid";
-
-      const books = echoagaBooks.filter(book => book.category === key);
-      books.forEach(book => grid.appendChild(createEchoagaBook(book)));
-
-      group.append(heading, grid);
-      catalog.appendChild(group);
-    });
-
-    librarySection.after(catalog);
-  }
-
-  document.addEventListener("click", event => {
-    if (!(event.target instanceof Element)) return;
-
-    const card = event.target.closest("[data-echoaga-book]");
-    if (!card) return;
-
-    const book = echoagaBooks.find(item => item.id === card.dataset.echoagaBook);
-    if (book) showBookDetails(book);
-  });
-
-  document.addEventListener("keydown", event => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    if (!(event.target instanceof Element)) return;
-
-    const card = event.target.closest("[data-echoaga-book]");
-    if (!card) return;
-
-    event.preventDefault();
-
-    const book = echoagaBooks.find(item => item.id === card.dataset.echoagaBook);
-    if (book) showBookDetails(book);
-  });
-}
-
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeEchoagaBooks, { once: true });
@@ -360,4 +228,4 @@ if (document.readyState === "loading") {
 }
 
 export { echoagaBooks, categoryNames, createEchoagaBook };
-
+    
