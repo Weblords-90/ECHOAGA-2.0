@@ -17,14 +17,15 @@ function initializeDiscover() {
     searchInput.insertAdjacentElement("afterend", status);
   }
 
-  function searchAudiobooks() {
+  function searchBooks() {
     const query = searchInput.value.trim().toLowerCase();
-    const cards = [...discover.querySelectorAll("[data-book-card]")];
+    const cards = [...discover.querySelectorAll("[data-echoaga-book]")];
 
     if (cards.length === 0) {
       status.textContent = query
-        ? "Audiobook search will be available when our catalogue is added."
+        ? "Our catalogue is being prepared. Check back soon."
         : "";
+
       status.hidden = !query;
 
       discover.querySelectorAll(".discover-section").forEach(section => {
@@ -49,28 +50,23 @@ function initializeDiscover() {
     });
 
     discover.querySelectorAll(".discover-section").forEach(section => {
-      const sectionCards = [...section.querySelectorAll("[data-book-card]")];
+      const sectionCards = [...section.querySelectorAll("[data-echoaga-book]")];
 
       section.hidden = query !== "" &&
         sectionCards.length > 0 &&
         !sectionCards.some(card => !card.hidden);
     });
 
-    if (!query) {
-      status.textContent = "";
-      status.hidden = true;
-      return;
-    }
+    status.textContent = !query
+      ? ""
+      : visibleCount === 0
+        ? "No books found. Try another search."
+        : `${visibleCount} result${visibleCount === 1 ? "" : "s"} found.`;
 
-    status.textContent = visibleCount === 0
-      ? "No audiobooks found. Try another search."
-      : `${visibleCount} audiobook${visibleCount === 1 ? "" : "s"} found.`;
-
-    status.hidden = false;
+    status.hidden = !query;
   }
 
-  searchInput.addEventListener("input", searchAudiobooks);
+  searchInput.addEventListener("input", searchBooks);
 }
 
 export { initializeDiscover };
-                                                             
