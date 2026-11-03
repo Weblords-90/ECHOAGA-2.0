@@ -389,6 +389,38 @@
   </nav>
 
   <script type="module" src="js/auth.js"></script>
+  
+<script>
+(function () {
+  function showError(message) {
+    let panel = document.getElementById("echoagaDiagnostic");
+
+    if (!panel) {
+      panel = document.createElement("div");
+      panel.id = "echoagaDiagnostic";
+      panel.style.cssText = "position:fixed;top:10px;left:10px;right:10px;z-index:999999;background:#250909;color:#fff;padding:16px;border:2px solid #ff5555;border-radius:12px;font:14px Arial;white-space:pre-wrap;overflow-wrap:anywhere;max-height:60vh;overflow:auto;";
+      document.body.appendChild(panel);
+    }
+
+    panel.textContent += (panel.textContent ? "\n\n" : "") + message;
+  }
+
+  window.addEventListener("error", function (event) {
+    const target = event.target;
+    showError(
+      "JAVASCRIPT / RESOURCE ERROR\n" +
+      (event.message || "Failed to load: " + (target?.src || target?.href || "Unknown resource")) +
+      (event.filename ? "\nFile: " + event.filename : "") +
+      (event.lineno ? "\nLine: " + event.lineno : "")
+    );
+  }, true);
+
+  window.addEventListener("unhandledrejection", function (event) {
+    showError("UNHANDLED PROMISE ERROR\n" + String(event.reason));
+  });
+})();
+</script>
+  
   <script type="module" src="firebase.js"></script>
   <script type="module" src="js/books.js"></script>
   <script type="module" src="js/app.js"></script>
