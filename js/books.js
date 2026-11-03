@@ -150,6 +150,13 @@ function createEchoagaBook(book) {
   card.setAttribute("role", "button");
   card.setAttribute("aria-label", `View ${book.title}`);
   card.dataset.echoagaBook = book.id;
+  card.dataset.search = [
+    book.title,
+    book.author,
+    book.category,
+    categoryNames[book.category],
+    book.description
+  ].join(" ").toLowerCase();
 
   const bookElement = document.createElement("div");
   bookElement.className = "echoaga-book";
@@ -207,6 +214,25 @@ function renderBookGrid(container, books) {
   });
 }
 
+function renderDiscoverBooks() {
+  const discover = document.getElementById("discover");
+  const firstSection = discover?.querySelector(".discover-section");
+
+  if (!firstSection || document.getElementById("echoagaDiscoverBooks")) return;
+
+  firstSection.querySelector(".discover-placeholder")?.remove();
+
+  const grid = document.createElement("div");
+  grid.id = "echoagaDiscoverBooks";
+  grid.className = "echoaga-book-grid";
+
+  echoagaBooks.forEach(book => {
+    grid.appendChild(createEchoagaBook(book));
+  });
+
+  firstSection.appendChild(grid);
+}
+
 function showBookDetails(book) {
   let dialog = document.getElementById("echoagaBookDialog");
 
@@ -235,7 +261,7 @@ function showBookDetails(book) {
 
   const author = document.createElement("p");
   author.className = "echoaga-dialog-author";
-  author.textContent = `Written by ${book.author}`;
+  author.textContent = `Created by ${book.author}`;
 
   const category = document.createElement("span");
   category.className = "echoaga-dialog-category";
@@ -247,7 +273,9 @@ function showBookDetails(book) {
 
   const note = document.createElement("p");
   note.className = "echoaga-dialog-note";
-  note.textContent = "Demo audiobook • Audio playback is not available yet.";
+  note.textContent = book.category === "manga"
+    ? "Demo manga • Page-by-page reading is coming soon."
+    : "Demo audiobook • Audio playback is not available yet.";
 
   dialog.append(close, heading, title, author, category, description, note);
 
@@ -269,6 +297,8 @@ function initializeEchoagaBooks() {
     document.getElementById("continueBookGrid"),
     continueBooks
   );
+
+  renderDiscoverBooks();
 
   const librarySection = document.querySelector("#library .library-category-section");
 
@@ -326,5 +356,4 @@ if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeEchoagaBooks, { once: true });
 } else {
   initializeEchoagaBooks();
-}
-
+                                          }
