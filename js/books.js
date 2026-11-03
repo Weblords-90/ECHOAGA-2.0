@@ -355,5 +355,5 @@ function initializeEchoagaBooks() {
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeEchoagaBooks, { once: true });
 } else {
-  initializeEchoagaBooks();
+  initializeEchoagaBooks(); export { echoagaBooks, categoryNames, createEchoagaBook };
                                           }
