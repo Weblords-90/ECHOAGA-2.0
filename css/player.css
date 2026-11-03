@@ -6,6 +6,7 @@
   left: 12px;
   z-index: 900;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   min-height: 68px;
@@ -67,20 +68,76 @@
 .mini-player-controls button {
   display: grid;
   place-items: center;
-  width: 35px;
-  height: 35px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   padding: 0;
   border: 0;
   border-radius: 50%;
   background: transparent;
   color: var(--text);
-  font-size: 17px;
-  transition: transform .2s ease, background .2s ease;
+  font-size: 13px;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .mini-player-controls .play-button {
   background: var(--gold);
-  color: #17130a;
+  color: #080808;
+  font-size: 16px;
+}
+
+.mini-player-progress {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 12px 8px;
+}
+
+.mini-player-progress input {
+  display: block;
+  width: 100%;
+  height: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(
+    to right,
+    var(--gold) var(--player-progress, 0%),
+    var(--border) var(--player-progress, 0%)
+  );
+  cursor: pointer;
+}
+
+.mini-player-progress input::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--gold);
+}
+
+.mini-player-progress input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.mini-player-time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
 }
 
 .player-screen {
@@ -100,7 +157,7 @@
   border: 1px solid var(--border);
   border-radius: 24px;
   background:
-    radial-gradient(circle at 50% 35%, rgba(207, 169, 79, .2), transparent 55%),
+    radial-gradient(circle at 50% 35%, rgba(207, 169, 79, 0.2), transparent 55%),
     linear-gradient(145deg, var(--surface-raised), var(--surface));
   box-shadow: 0 18px 45px var(--shadow);
   color: var(--gold);
@@ -157,7 +214,7 @@
   background: var(--surface);
   color: var(--text);
   font-size: 18px;
-  transition: transform .2s ease, background .2s ease;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .player-controls .main-play-button {
@@ -171,7 +228,7 @@
 
 .player-controls button:active,
 .mini-player-controls button:active {
-  transform: scale(.92);
+  transform: scale(0.92);
 }
 
 .mini-player-controls button:focus-visible,
@@ -206,87 +263,15 @@
   .mini-player-controls button {
     width: 32px;
     height: 32px;
+    min-width: 32px;
+    min-height: 32px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mini-player-controls button,
-  .player-controls button {
-    transition: none;
-  }
-}
-
-.mini-player-progress {
-  grid-column: 1 / -1;
-  width: 100%;
-  min-width: 0;
-  padding: 0 12px 8px;
-}
-
-.mini-player-progress input {
-  display: block;
-  width: 100%;
-  height: 5px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 10px;
-  appearance: none;
-  -webkit-appearance: none;
-  background: linear-gradient(
-    to right,
-    var(--gold) var(--player-progress, 0%),
-    var(--border) var(--player-progress, 0%)
-  );
-  cursor: pointer;
-}
-
-.mini-player-progress input::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
-  border: 0;
-  border-radius: 50%;
-  appearance: none;
-  -webkit-appearance: none;
-  background: var(--gold);
-}
-
-.mini-player-progress input::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.mini-player-time {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: 10px;
-  font-variant-numeric: tabular-nums;
-}
-
-.mini-player-controls button {
-  min-width: 36px;
-  min-height: 36px;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  font-size: 13px;
-}
-
-.mini-player-controls .play-button {
-  border-radius: 50%;
-  background: var(--gold);
-  color: #080808;
-  font-size: 16px;
-}
-
-@media (prefers-reduced-motion: reduce) {
+  .player-controls button,
   .mini-player-progress input {
     transition: none;
   }
 }
-
