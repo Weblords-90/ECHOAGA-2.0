@@ -352,8 +352,12 @@ function initializeEchoagaBooks() {
   });
 }
 
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeEchoagaBooks, { once: true });
 } else {
-  initializeEchoagaBooks(); export { echoagaBooks, categoryNames, createEchoagaBook };
-                                          }
+  initializeEchoagaBooks();
+}
+
+export { echoagaBooks, categoryNames, createEchoagaBook };
+
